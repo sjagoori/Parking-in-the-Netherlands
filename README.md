@@ -1,6 +1,8 @@
 # 👋 Welcome to Functional-programming!
+_The repo is used for the course functional programming; throughout this course, the wiki is actively updated with new (daily or weekly) content._
 
-The repo is used for the course functional programming; throughout this course, the wiki is actively updated with new (daily or weekly) content. 
+## 📓 In short
+This course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), a dutch newsagency that distributes their paper digitally as physically. We're making a visualization using one of their datasets; this visualization might get included in their publications.
 
-Furthermore, this course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), a dutch newsagency that distributes their paper digitally as physically. We're making a visualization using one of their datasets; this visualization might get included in their publications.
-
+## 📝 License
+[GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
