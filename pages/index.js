@@ -13,6 +13,10 @@ export default class Index extends React.Component {
     }
   }
 
+  /**
+  * Funtion makes a GET request to given url 
+  * @param {String} url - API endpoint
+  */
   getData() {
     const callURL = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
     axios.get(callURL).then(response => response).then(response => this.setState({ data: { state: true, results: response.data } }))
