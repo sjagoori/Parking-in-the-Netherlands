@@ -4,6 +4,8 @@ _The repo is used for the course functional programming; throughout this course,
 ## 📓 In short
 This course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), a dutch newsagency that distributes their paper digitally as physically. We're making a visualization using one of their datasets; this visualization might get included in their publications.
 
+This project will transform raw data into clean data, and then visualize it using [D3](https://github.com/d3/d3).
+
 ## 🤖 Installation
 **Run the project:**
 1. Install dependencies
