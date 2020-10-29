@@ -25,7 +25,6 @@ export default class Index extends React.Component {
   render() {
     const dataset = this.state.data.results
     const kentekenData = filterData(dataset, 'kenteken')
-    // console.log(filterData(dataset, 'kenteken'))
 
     const resultView = <div> {kentekenData} </div>
     const loadView = <span>Loading</span>
