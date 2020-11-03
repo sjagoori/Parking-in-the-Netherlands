@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import {barchart} from '../modules/charts'
 
 export default class Index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       data: {
-        state: false,
+        state: true,
         results: ['loading']
       }
     }
@@ -22,10 +23,15 @@ export default class Index extends React.Component {
 
   componentDidMount() {
     console.warn('mounted')
+    const data = [40, 20, 130, 60, 80]
+    barchart(200,200, 'barchart', data);
   }
 
   render() {
-    const resultView = <div> <h1>Hello world!</h1> </div>
+    const resultView = <div>
+      <h1>Hello world!</h1>
+      <div id="barchart"></div>
+    </div>
     const loadView = <div> <h1>Loading</h1> </div>
 
     return (
