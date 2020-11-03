@@ -24,7 +24,7 @@ export default class Index extends React.Component {
   componentDidMount() {
     console.warn('mounted')
     const data = [40, 20, 130, 60, 80]
-    barchart(200,200, 'barchart', data);
+    barchart(200, 'barchart', data);
   }
 
   render() {
