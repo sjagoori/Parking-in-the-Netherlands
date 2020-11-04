@@ -8,9 +8,8 @@ This project will transform raw data into clean data, and then visualize it usin
 
 ## Research 
 [See the wiki for a complete version](https://github.com/sjagoori/functional-programming/wiki/%F0%9F%94%8E-Research)
-This project will try to explore the diversity of registered vehicles in the Netherlands.
 
-### **Research question:**
+### Research question
 How diverse are the registered vehicles in the Netherlands?
 
 ### Subquestions
