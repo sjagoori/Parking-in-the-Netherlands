@@ -16,7 +16,7 @@ This project will transform raw data into clean data, and then visualize it usin
 [See the wiki for a complete version](https://github.com/sjagoori/functional-programming/wiki/%F0%9F%94%8E-Research)
 
 ### Research question
-How diverse are the registered vehicles in the Netherlands?
+How diverse are the registered vehicles in the Netherlands and how optimized are parking places for them?
 
 ### Subquestions
 * What vehicle type are popular?
