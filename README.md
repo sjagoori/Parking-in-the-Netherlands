@@ -16,14 +16,13 @@ This project will transform raw data into clean data, and then visualize it usin
 [See the wiki for a complete version](https://github.com/sjagoori/functional-programming/wiki/%F0%9F%94%8E-Research)
 
 ### Research question
-How diverse are the registered vehicles in the Netherlands and how optimized are parking places for them?
+What are the disabled parking-space friendly cities in the Netherlands? 
 
-### Subquestions
-* What vehicle type are popular?
-* What are popular brands?
-* What are the prominent vehicle colors?
-* What is the ratio of personal vehicles and taxis?
-* What are the average build dates of vehicles?
+### Subquestion
+* What do disabled cardrivers require?
+* How are disabled cardrives dispersed?
+* How many disabled cars are in the Netherlands? 
+* How many disabled parking-spaces are in the Netherlands?
 
 
 ## 🤖 Installation
