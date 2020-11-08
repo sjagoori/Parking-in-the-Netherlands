@@ -6,12 +6,6 @@ This course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), 
 
 This project will transform raw data into clean data, and then visualize it using [D3](https://github.com/d3/d3).
 
-## Concepts
-* What are the effects of the new green deals on older cars?
-* How many people will be affected if the gas price goes up?
-* Does the rise of electric cars affect/convince other car owners to make the switch?
-* Does the Netherlands have enough charging stations if we switched to electric cars? 
-
 ## Research 
 [See the wiki for a complete version](https://github.com/sjagoori/functional-programming/wiki/%F0%9F%94%8E-Research)
 
