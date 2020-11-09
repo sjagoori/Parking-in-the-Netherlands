@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { color } from 'd3';
+import { color, text } from 'd3';
 const colors = ['cyan', '#ffcc00', 'pink']
 
 export function barchart(height, id, data) {
@@ -54,9 +54,9 @@ export function piechart(data, id) {
 
   // Pie gen + data counts 
   let pie = d3.pie()
-  .value(d => {
-    return d.amount;
-  });
+    .value(d => {
+      return d.amount;
+    });
 
   // Creating arc 
   let arc = d3.arc()
@@ -67,19 +67,35 @@ export function piechart(data, id) {
     .attr("transform", "translate(150,150)");
 
   // Grouping arcs
+
   let arcs = g.selectAll("arc")
     .data(pie(data))
     .enter().append("g")
     .on('mouseover', function (d, i) {
-      d3.select(this)
+      // console.log(this)
+      d3.select(this).selectAll('path')
         .transition()
-        .duration('300')
+        .duration('200')
         .attr('opacity', '.70')
+
+      d3.select(this).append('text')
+        .text(i.data.label)
+        .style('position', 'absolute')
+        // TODO: add tooltip
+        // .style('transform', 'translate(' + d3.pointer(d)[0] + ',' + d3.pointer(d)[1] + ')')
+        // .style("left", (d3.pointer(d)[0]) + "px")
+        // .style("top", (d3.pointer(d)[1]) + "px");
+        .attr("transform", "translate(-20, 5)")
     })
     .on('mouseout', function (d, i) {
-      d3.select(this).transition()
-        .duration('300')
-        .attr('opacity', '1')
+      d3.select(this).selectAll('path')
+        .transition()
+        .duration('200')
+        .attr('opacity', '1');
+      d3.select(this)
+        .selectAll('text')
+        .nodes()[1]
+        .remove()
     })
 
   // Appending path  
@@ -106,7 +122,7 @@ export function piechart(data, id) {
     .enter()
     .append('g')
     .attr("transform", function (d, i) {
-      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 20 ) + ")";
+      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 20) + ")";
     })
     .attr('class', 'legend')
 
