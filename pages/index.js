@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import {barchart} from '../modules/charts'
+import { barchart } from '../modules/charts'
+import { filterDisabled } from '../modules/util'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -17,19 +18,25 @@ export default class Index extends React.Component {
   * Funtion makes a GET request to given url 
   * @param {String} url - API endpoint
   */
-  getData(url) {
-    axios.get(url).then(response => response).then(response => this.setState({ data: { state: true, results: response.data } }))
+  async getData(url) {
+    return await axios.get(url).then(response => response.data)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.warn('mounted')
-    const data = [40, 20, 130, 60, 80]
-    barchart(200, 'barchart', data);
+
+    let parkingSpaces = await this.getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
+    let disabledAreas = filterDisabled(parkingSpaces, 1)
+    
+    // Piechart
+    let totalDisabledSpaces = disabledAreas.length
+    let totalNormalSpaces = parkingSpaces.length
+    console.log(totalNormalSpaces)
   }
 
   render() {
     const resultView = <div>
-      <h1>Hello world!</h1>
+      {/* <h1>Hello world!</h1> */}
       <div id="barchart"></div>
     </div>
     const loadView = <div> <h1>Loading</h1> </div>
