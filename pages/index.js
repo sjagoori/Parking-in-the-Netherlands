@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { barchart } from '../modules/charts'
+import { barchart, piechart } from '../modules/charts'
 import { filterDisabled } from '../modules/util'
 
 export default class Index extends React.Component {
@@ -27,17 +27,21 @@ export default class Index extends React.Component {
 
     let parkingSpaces = await this.getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
     let disabledAreas = filterDisabled(parkingSpaces, 1)
-    
+
     // Piechart
-    let totalDisabledSpaces = disabledAreas.length
-    let totalNormalSpaces = parkingSpaces.length
-    console.log(totalNormalSpaces)
+    // let totalDisabledSpaces = disabledAreas.length
+    // let totalNormalSpaces = parkingSpaces.length
+
+    console.log(disabledAreas.length)
+    console.log(parkingSpaces.length)
+
+    piechart([disabledAreas.length, parkingSpaces.length], 'chart')
   }
 
   render() {
     const resultView = <div>
       {/* <h1>Hello world!</h1> */}
-      <div id="barchart"></div>
+      <div id="chart"></div>
     </div>
     const loadView = <div> <h1>Loading</h1> </div>
 
