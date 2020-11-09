@@ -40,6 +40,34 @@ export default class Index extends React.Component {
       }
     ]
 
+    let sampleData = [
+      {
+        amount: disabledAreas.length,
+        label: 'Disabled'
+      },
+      {
+        amount: 300,
+        label: 'AAA'
+      },
+      {
+        amount: 100,
+        label: 'ZZZ'
+      },
+      {
+        amount: 700,
+        label: 'BBB'
+      },
+      {
+        amount: 100,
+        label: 'CCC'
+      },
+      {
+        amount: 500,
+        label: 'Regular'
+      }
+    ]
+
+
     piechart(data, 'chart')
   }
 
