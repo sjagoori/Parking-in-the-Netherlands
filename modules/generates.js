@@ -1,5 +1,5 @@
-import { barchart, piechart } from '../modules/charts'
-import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId } from '../modules/util'
+import { barchart, piechart } from './charts'
+import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId } from './util'
 
 export async function generatePiechart() {
   let parkingSpaces = await getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
@@ -49,6 +49,5 @@ export async function generatePiechart() {
 export async function generateBarchart() {
   let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
-  matchAreaId(parkingSpaces, geoParkinSpaces)
-  // console.log(geoParkinSpaces)
+  let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
 }

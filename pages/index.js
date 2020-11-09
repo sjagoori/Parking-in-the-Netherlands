@@ -1,6 +1,5 @@
 import React from 'react'
-import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId } from '../modules/util'
-import {generatePiechart} from '../modules/generates'
+import { generateBarchart, generatePiechart } from '../modules/generates'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -11,11 +10,11 @@ export default class Index extends React.Component {
         results: ['loading']
       }
     }
-  } 
+  }
 
   async componentDidMount() {
     console.warn('mounted')
-
+    generateBarchart()
     // generatePiechart()
   }
 
