@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
-import { color, text } from 'd3';
-const colors = ['cyan', '#ffcc00', 'pink']
+const colors = ['cyan', '#ffcc00', 'pink', 'red', 'purple']
 
 export function barchart(height, id, data) {
   const barWidth = 35;
@@ -109,7 +108,7 @@ export function piechart(data, id) {
   arcs.append("text")
     .attr("transform", (d) => {
       return "translate(" +
-        arc.centroid(d) + ")"
+        (arc.centroid(d)[0] - 8) + ',' + (arc.centroid(d)[1] + 5) + ")"
     })
     .style('fill', 'black')
     .text(function (d) {
