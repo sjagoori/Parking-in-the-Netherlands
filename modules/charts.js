@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-const colors = ['cyan', '#ffcc00', 'pink', 'red', 'purple']
+const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 
 export function barchart(height, id, data) {
   const barWidth = 35;
@@ -41,9 +41,14 @@ export function barchart(height, id, data) {
  * @param {Object} data 
  * @param {String} id 
  */
-export function piechart(data, id) {
+export function piechart(data, id, title) {
   let width = 800
-  let height = 800
+  let height = 300
+
+  d3.select("#" + id).append('text')
+  .text(title)
+  .style('font-size', '1.8em')
+  .style('display', 'block')
 
   // add dimensions, otherwise it's overflow will be hidden
   let svg = d3.select("#" + id)
@@ -71,7 +76,6 @@ export function piechart(data, id) {
     .data(pie(data))
     .enter().append("g")
     .on('mouseover', function (d, i) {
-      // console.log(this)
       d3.select(this).selectAll('path')
         .transition()
         .duration('200')
@@ -80,11 +84,7 @@ export function piechart(data, id) {
       d3.select(this).append('text')
         .text(i.data.label)
         .style('position', 'absolute')
-        // TODO: add tooltip
-        // .style('transform', 'translate(' + d3.pointer(d)[0] + ',' + d3.pointer(d)[1] + ')')
-        // .style("left", (d3.pointer(d)[0]) + "px")
-        // .style("top", (d3.pointer(d)[1]) + "px");
-        .attr("transform", "translate(-20, 5)")
+        .attr("transform", "translate(-45, 5)")
     })
     .on('mouseout', function (d, i) {
       d3.select(this).selectAll('path')
@@ -121,7 +121,7 @@ export function piechart(data, id) {
     .enter()
     .append('g')
     .attr("transform", function (d, i) {
-      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 20) + ")";
+      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 120) + ")";
     })
     .attr('class', 'legend')
 

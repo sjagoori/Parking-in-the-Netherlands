@@ -32,11 +32,11 @@ export default class Index extends React.Component {
     let data = [
       {
         amount: disabledAreas.length,
-        label: 'Disabled'
+        label: 'Disabled friendly'
       },
       {
         amount: parkingSpaces.length,
-        label: 'Regular'
+        label: 'Regular parking'
       }
     ]
 
@@ -68,7 +68,7 @@ export default class Index extends React.Component {
     ]
 
 
-    piechart(data, 'chart')
+    piechart(data, 'chart', 'The amount of parking places that are disabled friendly')
   }
 
   render() {
