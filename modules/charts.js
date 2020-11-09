@@ -46,9 +46,11 @@ export function piechart(data, id, title) {
   let height = 300
 
   d3.select("#" + id).append('text')
-  .text(title)
-  .style('font-size', '1.8em')
-  .style('display', 'block')
+    .text(title)
+    .style('font-size', '1.8em')
+    .style('font-weight', 'bold')
+    .style('display', 'block')
+    .attr('class', 'title')
 
   // add dimensions, otherwise it's overflow will be hidden
   let svg = d3.select("#" + id)
@@ -69,8 +71,6 @@ export function piechart(data, id, title) {
 
   let g = svg.append("g")
     .attr("transform", "translate(150,150)");
-
-  // Grouping arcs
 
   let arcs = g.selectAll("arc")
     .data(pie(data))
@@ -111,6 +111,7 @@ export function piechart(data, id, title) {
         (arc.centroid(d)[0] - 8) + ',' + (arc.centroid(d)[1] + 5) + ")"
     })
     .style('fill', 'black')
+    .style('font-weight', 'bold')
     .text(function (d) {
       return d.data.amount;
     })
