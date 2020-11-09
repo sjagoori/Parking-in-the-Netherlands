@@ -56,11 +56,11 @@ export function piechart(data2, id) {
 
   // Creating arc 
   let arc = d3.arc()
-    .innerRadius(0)
-    .outerRadius(100);
+    .innerRadius(100)
+    .outerRadius(140);
 
   let g = svg.append("g")
-    .attr("transform", "translate(150,120)");
+    .attr("transform", "translate(150,150)");
 
   // Grouping different arcs 
   let arcs = g.selectAll("arc")
@@ -92,7 +92,7 @@ export function piechart(data2, id) {
       return "translate(" +
         arc.centroid(d) + ")"
     })
-    .style('fill', 'white')
+    .style('fill', 'black')
     .text(function (d) {
       return d.data;
     })
