@@ -132,7 +132,8 @@ export function piechart(data, id) {
     .attr("fill", (data, i) => {
       return colors[i % Object.keys(colors).length];
     })
-    .style('margin-left', "10px")
+    .style('x', "-5")
+    .style('rx', "50")
 
   legend.append('text')
     .text((d) => {
