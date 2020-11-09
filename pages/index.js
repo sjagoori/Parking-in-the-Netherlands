@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { barchart, piechart } from '../modules/charts'
 import { filterDisabled } from '../modules/util'
+import { normalizeRouteRegex } from 'next/dist/lib/load-custom-routes'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -28,14 +29,18 @@ export default class Index extends React.Component {
     let parkingSpaces = await this.getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
     let disabledAreas = filterDisabled(parkingSpaces, 1)
 
-    // Piechart
-    // let totalDisabledSpaces = disabledAreas.length
-    // let totalNormalSpaces = parkingSpaces.length
+    let data = [
+      {
+        amount: disabledAreas.length,
+        label: 'Disabled'
+      },
+      {
+        amount: parkingSpaces.length,
+        label: 'Regular'
+      }
+    ]
 
-    console.log(disabledAreas.length)
-    console.log(parkingSpaces.length)
-
-    piechart([disabledAreas.length, parkingSpaces.length], 'chart')
+    piechart(data, 'chart')
   }
 
   render() {

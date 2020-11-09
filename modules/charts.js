@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { color } from 'd3';
-const colors = ['#F7A399', '#EF6351', '#FFCC00']
+const colors = ['cyan', '#ffcc00', 'pink']
 
 export function barchart(height, id, data) {
   const barWidth = 35;
@@ -42,17 +42,21 @@ export function barchart(height, id, data) {
  * @param {Object} data 
  * @param {String} id 
  */
-export function piechart(data2, id) {
-  console.log(data2)
+export function piechart(data, id) {
+  let width = 800
+  let height = 800
 
   // add dimensions, otherwise it's overflow will be hidden
   let svg = d3.select("#" + id)
     .append("svg")
-    .attr('width', 800)
-    .attr('height', 800)
+    .attr('width', width)
+    .attr('height', height)
 
-  // Creating Pie generator 
-  let pie = d3.pie();
+  // Pie gen + data counts 
+  let pie = d3.pie()
+  .value(d => {
+    return d.amount;
+  });
 
   // Creating arc 
   let arc = d3.arc()
@@ -62,16 +66,15 @@ export function piechart(data2, id) {
   let g = svg.append("g")
     .attr("transform", "translate(150,150)");
 
-  // Grouping different arcs 
+  // Grouping arcs
   let arcs = g.selectAll("arc")
-    .data(pie(data2))
-    .enter()
-    .append("g")
+    .data(pie(data))
+    .enter().append("g")
     .on('mouseover', function (d, i) {
       d3.select(this)
         .transition()
-          .duration('300')
-          .attr('opacity', '.85')
+        .duration('300')
+        .attr('opacity', '.70')
     })
     .on('mouseout', function (d, i) {
       d3.select(this).transition()
@@ -81,10 +84,10 @@ export function piechart(data2, id) {
 
   // Appending path  
   arcs.append("path")
-    .attr("fill", (data, i) => {
+    .attr("d", arc)
+    .attr("fill", (d, i) => {
       return colors[i % Object.keys(colors).length];
-    })
-    .attr("d", arc);
+    });
 
   // Adding data to each arc 
   arcs.append("text")
@@ -94,6 +97,32 @@ export function piechart(data2, id) {
     })
     .style('fill', 'black')
     .text(function (d) {
-      return d.data;
+      return d.data.amount;
     })
+
+  let legendMargin = 25
+  const legend = svg.selectAll('.legend')
+    .data(data)
+    .enter()
+    .append('g')
+    .attr("transform", function (d, i) {
+      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 20 ) + ")";
+    })
+    .attr('class', 'legend')
+
+  legend.append('rect')
+    .attr('width', 10)
+    .attr('height', 10)
+    .attr("fill", (data, i) => {
+      return colors[i % Object.keys(colors).length];
+    })
+    .style('margin-left', "10px")
+
+  legend.append('text')
+    .text((d) => {
+      return d.label
+    })
+    .attr('x', 10)
+    .attr('y', 10)
+    .style('fill', 'black')
 }
