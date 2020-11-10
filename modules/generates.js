@@ -1,4 +1,4 @@
-import { barchart, piechart } from './charts'
+import { barchart, piechart, mapchart } from './charts'
 import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId } from './util'
 
 export async function generatePiechart() {
@@ -46,8 +46,9 @@ export async function generatePiechart() {
   piechart(data, 'chart', 'The amount of parking places that are disabled friendly')
 }
 
-export async function generateBarchart() {
+export async function generateMapchart() {
   let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
   let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
+  mapchart(disabledSpaces,'chart', 'Some title for the mapchart')
 }

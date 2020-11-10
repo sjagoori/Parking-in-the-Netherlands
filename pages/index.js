@@ -1,5 +1,5 @@
 import React from 'react'
-import { generateBarchart, generatePiechart } from '../modules/generates'
+import { generatePiechart, generateMapchart } from '../modules/generates'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Index extends React.Component {
 
   async componentDidMount() {
     console.warn('mounted')
-    generateBarchart()
+    // generateMapchart()
     // generatePiechart()
   }
 

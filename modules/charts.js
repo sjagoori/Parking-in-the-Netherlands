@@ -1,4 +1,6 @@
 import * as d3 from 'd3';
+import * as topojson from 'topojson';
+
 const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 
 export function barchart(height, id, data) {
@@ -38,8 +40,9 @@ export function barchart(height, id, data) {
 
 /**
  * Piechart
- * @param {Object} data 
- * @param {String} id 
+ * @param {Object} data - dataset
+ * @param {String} id - element id for chart
+ * @param {String} title - chart title
  */
 export function piechart(data, id, title) {
   let width = 800
@@ -142,4 +145,83 @@ export function piechart(data, id, title) {
     .attr('x', 10)
     .attr('y', 10)
     .style('fill', 'black')
+}
+
+/**
+ * Map chart
+ * @param {Object} data - dataset
+ * @param {String} id - element id for chart
+ * @param {String} title - chart title
+ */
+export function mapchart(data, id, title) {
+  let width = 800
+  let height = 300
+
+  d3.select("#" + id).append('text')
+    .text(title)
+    .style('font-size', '1.8em')
+    .style('font-weight', 'bold')
+    .style('display', 'block')
+    .attr('class', 'title')
+
+  const path = d3.geoPath()
+  const zoom = d3.zoom().scaleExtent([1, 9]).on('zoom', zoomed)
+  const zoomed = event => {
+    const { transform } = event;
+    g.attr('transform', transform)
+    g.attr('stroke-width', 1 / transform.k)
+  }
+
+  const svg = d3.select("#" + id)
+    .append("svg")
+    .attr('viewBox', [0, 0, width, height])
+    .on('click', reset)
+
+  const g = svg.append('g')
+
+  const projection = d3.geoMercator().scale(6000).center([5.116667, 52.17])
+  const pathGenerator = path.projection(projection)
+
+  const gemeentes = g
+    .append('g')
+    .attr('fill', '#444')
+    .attr('cursor', 'pointer')
+    .selectAll('path')
+    .data(topojson.feature(data, data))
+    .join('path')
+    .on('click', clicked)
+    .attr('d', path);
+
+  gemeentes.append('title').text((d) => d.properties.statname);
+
+  svg.call(zoom);
+
+  const reset = () =>{ 
+    gemeentes.transition().style('fill', null)
+    svg.transition().duration(300).call(
+      zoom.transform,
+      d3.zoomIdentity,
+      d3.zoomTransform(svg.node()).invert([width/2, height/2])
+    )
+  }
+
+  const clicked = (event, d) => {
+    const [[x0, y0], [x1, y1]] = path.bounds(d);
+    event.stopPropagation();
+    gemeentes.transition().style('fill', null);
+    d3.select(this).transition().style('fill', 'red');
+    svg
+      .transition()
+      .duration(750)
+      .call(
+        zoom.transform,
+        d3.zoomIdentity
+          .translate(width / 2, height / 2)
+          .scale(
+            Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height))
+          )
+          .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+        d3.pointer(event, svg.node())
+      );    
+  }
 }
