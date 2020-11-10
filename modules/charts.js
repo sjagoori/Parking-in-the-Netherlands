@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
+import { axisLeft, axisTop, axisBottom } from 'd3';
 import * as topojson from 'topojson';
+import { filterData } from './util'
 
 const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 
@@ -9,11 +11,37 @@ const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
  * @param {String} id - element id for chart
  * @param {String} title - chart title
  */
-export function barchart(data, id, title){
-  let width = 800
-  let height = 300
+export function barchart(data, id, title) {
+  let width = 600
+  let height = 1200
+  const xValue = d => d.amount
+  const yValue = d => d.name
+  const margin = { top: 20, right: 20, bottom: 20, left: 100 }
+  const innerWidth = width - margin.left - margin.right
+  const innerHeight = height - margin.top - margin.bottom
 
-  console.log(data)
+  const xScale = d3.scaleLinear()
+    .domain([0, d3.max(data, xValue)])
+    .range([0, innerWidth])
+
+  const yScale = d3.scaleBand()
+    .domain(data.map(yValue))
+    .range([0, innerHeight])
+    .padding(0.2)
+
+  let dropdownMenu = d3.select("#" + id).append('select')
+    .attr('name', 'province-list')
+    .attr('id', 'province-list')
+    .attr('selected', 'Zeeland')
+
+
+  let options = dropdownMenu.selectAll('option')
+    .data([...new Set(data)])
+    .enter()
+    .append('option')
+
+  options.text(d => d.province)
+    .attr('value', d => d.province)
 
   d3.select("#" + id).append('text')
     .text(title)
@@ -27,8 +55,60 @@ export function barchart(data, id, title){
     .append("svg")
     .attr('width', width)
     .attr('height', height)
-}
+    .append('g')
 
+  const g = svg.append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+  g.append('g').call(axisLeft(yScale)).style('color', 'blue')
+  g.append('g').call(axisTop(xScale)).style('color', 'blue')
+
+  g.selectAll('rect')
+    .data(data)
+    .enter().append('rect')
+    .attr('y', d => yScale(yValue(d)))
+    .attr("width", d => xScale(xValue(d)))
+    .attr("height", yScale.bandwidth())
+    .style('fill', colors[1])
+    .append('text')
+
+  const update = (selectedOption) => {
+    let a = data.filter(elem => elem.province == selectedOption)
+
+    const xValue = a => a.amount
+    const yValue = a => a.name
+
+    const xScale = d3.scaleLinear()
+      .domain([0, d3.max(a, xValue)])
+      .range([0, innerWidth])
+
+    const yScale = d3.scaleBand()
+      .domain(a.map(yValue))
+      .range([0, innerHeight])
+      .padding(0.2)
+
+
+    g.selectAll('g').remove()
+    g.selectAll('rect').remove()
+
+
+    g.selectAll('rect')
+      .data(a)
+      .enter().append('rect')
+      .attr('y', d => yScale(yValue(d)))
+      .attr("width", d => xScale(xValue(d)))
+      .attr("height", yScale.bandwidth())
+      .style('fill', colors[1])
+      .append('text')
+
+    g.append('g').call(axisLeft(yScale)).style('color', 'blue')
+    g.append('g').call(axisTop(xScale)).style('color', 'blue')
+  }
+
+  d3.select('#province-list').on('change', (d) => {
+    update(d3.select('#province-list').property("value"))
+  })
+}
 /**
  * Piechart
  * @param {Object} data - dataset
@@ -159,7 +239,7 @@ export function mapchart(disabledSpaces, mapData, id, title) {
 
   const svg = d3.select("#" + id)
     .append("svg")
-    .attr('viewBox', [0,-150, width, height])
+    .attr('viewBox', [0, -150, width, height])
     .attr('transform', 'translate(0,50)')
 
   const g = svg.append('g')
@@ -175,12 +255,12 @@ export function mapchart(disabledSpaces, mapData, id, title) {
     .join('path')
     .attr('d', path);
 
-  const s = g 
+  const s = g
     .append('g')
     .select('path')
     .data(disabledSpaces)
     .join('path')
-    .attr('d', path) 
+    .attr('d', path)
 }
 
 
