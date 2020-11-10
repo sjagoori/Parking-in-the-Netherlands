@@ -53,6 +53,15 @@ export function getLocationNames(data) {
 }
 
 /**
+ * Function finds province for given place
+ * @param {String} city - city name 
+ * @param {Object} d1 - dataset
+ */
+export function findProvince(city, d1) {
+  return d1.map(element => element.place === city ? element.province : false).filter(item => typeof item === 'string')[0]
+}
+
+/**
  * Function returns strings contained in brackets
  * @param {String} element - string
  */
@@ -62,22 +71,9 @@ function groupInBrackets(element) {
 }
 
 /**
- * Function finds province for given place
- * @param {String} city - city name 
- * @param {Object} d1 - dataset
+ * Function capitalizes first letter of given string
+ * @param {Strin} word - string to capitalize
  */
-export function findProvince(city, d1) {
-  // d1.map(element => {
-  //   if (element.place == city)
-  //     console.warn(element.place + '\t' + city + '\t' + element.province)
-  //     if (element.province == undefined){
-  //       console.log(element, city)
-  //     }
-  // })
-
-  return d1.map(element => element.place === city ? element.province : false).filter(item => typeof item === 'string')[0]
-}
-
 function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase + word.slice(1)
 }
