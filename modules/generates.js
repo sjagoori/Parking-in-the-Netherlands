@@ -1,5 +1,26 @@
 import { barchart, piechart, mapchart } from './charts'
-import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId } from './util'
+import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId, getLocationNames, findProvince } from './util'
+
+//TODO return boolean for loading state in index.js
+
+export async function generateBarchart() {
+  let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
+  let provinceData = await getData('https://opendata.rdw.nl/resource/ygq4-hh5q.json')
+
+  let a = getLocationNames(geoParkinSpaces)
+  let u = [...new Set(a)]
+  let b = []
+  u.map(word => {
+    b.push({
+      name: word,
+      amount: a.reduce((k, i) => { return k + (i === word) }, 0),
+      province: findProvince(word, provinceData)
+    })
+  })
+  console.log(b)
+  
+  
+}
 
 export async function generatePiechart() {
   let parkingSpaces = await getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
@@ -47,8 +68,9 @@ export async function generatePiechart() {
 }
 
 export async function generateMapchart() {
-  let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
+  // let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
-  let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
-  mapchart(disabledSpaces,'chart', 'Some title for the mapchart')
+  // let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
+  // let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
+  // mapchart(disabledSpaces, mapData,'chart', 'Some title for the mapchart')
 }

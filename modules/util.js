@@ -42,3 +42,29 @@ export function filterAreaIdDisabled(data) {
 export function matchAreaId(d1, d2) {
   return d1.map(element => d2.find(key => element.areaid == key.areaid)).filter(item => typeof item === 'object')
 }
+
+/**
+ * Function returns location names from the areadesc  key.
+ * @param {Object} data - dataset 
+ */
+export function getLocationNames(data) {
+  // some entries do not have a description
+  return data.map(key => key['areadesc'] ? groupInBrackets(key.areadesc) : false).filter(item => typeof item === 'string')
+}
+
+/**
+ * Function returns strings contained in brackets
+ * @param {String} element - string
+ */
+function groupInBrackets(element) {
+  return element.includes('(') ? element.match(/(?<=\().+?(?=\))/)[0] : false
+}
+
+/**
+ * Function finds province for given place
+ * @param {String} city - city name 
+ * @param {Object} d1 - dataset
+ */
+export function findProvince(city, d1) {
+  return d1.map(element => element.place == city ? element.province : false).filter(item => typeof item === 'string')[0]
+}
