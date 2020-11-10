@@ -57,7 +57,8 @@ export function getLocationNames(data) {
  * @param {String} element - string
  */
 function groupInBrackets(element) {
-  return element.includes('(') ? element.match(/(?<=\().+?(?=\))/)[0] : false
+  let a = element.includes('(') ? element.match(/(?<=\().+?(?=\))/)[0] : false
+  return a
 }
 
 /**
@@ -66,5 +67,17 @@ function groupInBrackets(element) {
  * @param {Object} d1 - dataset
  */
 export function findProvince(city, d1) {
-  return d1.map(element => element.place == city ? element.province : false).filter(item => typeof item === 'string')[0]
+  // d1.map(element => {
+  //   if (element.place == city)
+  //     console.warn(element.place + '\t' + city + '\t' + element.province)
+  //     if (element.province == undefined){
+  //       console.log(element, city)
+  //     }
+  // })
+
+  return d1.map(element => element.place === city ? element.province : false).filter(item => typeof item === 'string')[0]
+}
+
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase + word.slice(1)
 }

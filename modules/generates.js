@@ -11,12 +11,14 @@ export async function generateBarchart() {
   let u = [...new Set(a)]
   let b = []
   u.map(word => {
+    let p = findProvince(word, provinceData)
     b.push({
       name: word,
       amount: a.reduce((k, i) => { return k + (i === word) }, 0),
-      province: findProvince(word, provinceData)
+      province: p != undefined ? p : 'Anders' 
     })
   })
+  
   console.log(b)
   
   
