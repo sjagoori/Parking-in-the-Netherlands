@@ -3,6 +3,9 @@ import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId, getLocation
 
 //TODO return boolean for loading state in index.js
 
+/**
+ * Function prepares dataset and generates a barchart
+ */
 export async function generateBarchart() {
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
   let provinceData = await getData('https://opendata.rdw.nl/resource/ygq4-hh5q.json')
@@ -19,11 +22,12 @@ export async function generateBarchart() {
     })
   })
   
-  console.log(b)
-  
-  
+  barchart(b, 'chart', 'Title for the barchart')
 }
 
+/**
+ * Function prepares dataset and generates a piechart
+ */
 export async function generatePiechart() {
   let parkingSpaces = await getData('https://opendata.rdw.nl/resource/b3us-f26s.json')
   let disabledAreas = filterDisabled(parkingSpaces, 1)

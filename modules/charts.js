@@ -3,39 +3,30 @@ import * as topojson from 'topojson';
 
 const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 
-export function barchart(height, id, data) {
-  const barWidth = 35;
-  const barOffset = 5
-  const width = (data.length * 40)
+/**
+ * Barchart
+ * @param {Object} data - dataset
+ * @param {String} id - element id for chart
+ * @param {String} title - chart title
+ */
+export function barchart(data, id, title){
+  let width = 800
+  let height = 300
 
-  const x = d3.scaleBand()
-    .domain(d3.range(data.length))
-    .range([0, width + 50])
-    .padding(0.1)
+  console.log(data)
 
-  const y = d3.scaleLinear()
-    .domain([0, d3.max(data)])
-    .range([height - 50, 50])
+  d3.select("#" + id).append('text')
+    .text(title)
+    .style('font-size', '1.8em')
+    .style('font-weight', 'bold')
+    .style('display', 'block')
+    .attr('class', 'title')
 
-  const svg = d3.select("#" + id).append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .style("background-color", "#727272")
-    .style('padding', '10px 10px 0 10px')
-    .selectAll('rect')
-    .data(data)
-    .enter().append("rect")
-    .style("fill", '#ffcc00')
-    .attr("width", barWidth)
-    .attr("height", (d) => {
-      return d
-    })
-    .attr("x", (d, i) => {
-      return x(i)
-    })
-    .attr("y", (d) => {
-      return height - d
-    })
+  // add dimensions, otherwise it's overflow will be hidden
+  let svg = d3.select("#" + id)
+    .append("svg")
+    .attr('width', width)
+    .attr('height', height)
 }
 
 /**
@@ -191,3 +182,40 @@ export function mapchart(disabledSpaces, mapData, id, title) {
     .join('path')
     .attr('d', path) 
 }
+
+
+
+// export function barchart(height, id, data) {
+//   const barWidth = 35;
+//   const barOffset = 5
+//   const width = (data.length * 40)
+
+//   const x = d3.scaleBand()
+//     .domain(d3.range(data.length))
+//     .range([0, width + 50])
+//     .padding(0.1)
+
+//   const y = d3.scaleLinear()
+//     .domain([0, d3.max(data)])
+//     .range([height - 50, 50])
+
+//   const svg = d3.select("#" + id).append("svg")
+//     .attr("width", width)
+//     .attr("height", height)
+//     .style("background-color", "#727272")
+//     .style('padding', '10px 10px 0 10px')
+//     .selectAll('rect')
+//     .data(data)
+//     .enter().append("rect")
+//     .style("fill", '#ffcc00')
+//     .attr("width", barWidth)
+//     .attr("height", (d) => {
+//       return d
+//     })
+//     .attr("x", (d, i) => {
+//       return x(i)
+//     })
+//     .attr("y", (d) => {
+//       return height - d
+//     })
+// }
