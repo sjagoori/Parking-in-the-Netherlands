@@ -40,7 +40,7 @@ export async function generatePiechart() {
       label: 'Disabled friendly'
     },
     {
-      amount: parkingSpaces.length,
+      amount: (parkingSpaces.length-disabledAreas.length),
       label: 'Regular parking'
     }
   ]
