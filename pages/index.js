@@ -14,15 +14,17 @@ export default class Index extends React.Component {
 
   async componentDidMount() {
     console.warn('mounted')
-    // generateBarchart()
-    // generatePiechart()
+    generateBarchart()
+    generatePiechart()
     generateMapchart()
   }
 
   render() {
     const resultView = <div>
       {/* <h1>Hello world!</h1> */}
-      <div id="chart"></div>
+      <div id="mapchart"></div>
+      <div id="piechart"></div>
+      <div id="barchart"></div>
     </div>
     const loadView = <div> <h1>Loading</h1> </div>
 

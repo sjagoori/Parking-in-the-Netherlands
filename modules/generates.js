@@ -1,4 +1,6 @@
-import { barchart, piechart, mapchart } from './charts'
+import { mapchart } from './mapchart'
+import { piechart } from './piechart'
+import { barchart } from './barchart'
 import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId, getLocationNames, findProvince } from './util'
 
 //TODO return boolean for loading state in index.js
@@ -22,7 +24,7 @@ export async function generateBarchart() {
     })
   })
   
-  barchart(b, 'chart', 'Parkingspace dispresion per city per province')
+  barchart(b, 'barchart', 'Parkingspace dispresion per city per province')
 }
 
 /**
@@ -70,7 +72,7 @@ export async function generatePiechart() {
     }
   ]
 
-  piechart(data, 'chart', 'The amount of parking places that are disabled friendly')
+  piechart(data, 'piechart', 'The amount of parking places that are disabled friendly')
 }
 
 export async function generateMapchart() {
@@ -78,5 +80,5 @@ export async function generateMapchart() {
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
   let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
   let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
-  mapchart(geoParkinSpaces, disabledSpaces, mapData,'chart', 'Difference in parking spaces per driver type')
+  mapchart(geoParkinSpaces, disabledSpaces, mapData,'mapchart', 'Difference in parking spaces per driver type')
 }
