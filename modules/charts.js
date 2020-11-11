@@ -241,7 +241,7 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .append('g')
     .attr('fill', '#7a7a7a')
     .selectAll('path')
-    .data(feature.feature(mapData, mapData.objects.gemeente_2020).features)
+    .data(feature(mapData, mapData.objects.gemeente_2020).features)
     .join('path')
     .attr('d', path);
 
