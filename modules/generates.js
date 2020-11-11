@@ -22,7 +22,7 @@ export async function generateBarchart() {
     })
   })
   
-  barchart(b, 'chart', 'Title for the barchart')
+  barchart(b, 'chart', 'Parkingspace dispresion per city per province')
 }
 
 /**
@@ -74,9 +74,9 @@ export async function generatePiechart() {
 }
 
 export async function generateMapchart() {
-  // let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
+  let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
-  // let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
-  // let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
-  // mapchart(disabledSpaces, mapData,'chart', 'Some title for the mapchart')
+  let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
+  let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
+  mapchart(geoParkinSpaces, disabledSpaces, mapData,'chart', 'Some title for the mapchart')
 }
