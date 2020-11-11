@@ -228,53 +228,75 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
   const projection = geoMercator().scale(6000).center([5.116667, 52.17])
   const path = geoPath().projection(projection)
 
-  const width = 700
-  const height = 700
+  const width = 600
+  const height = 550
 
-  const svg = select("#" + id)
+  let head = select("#" + id)
+
+  head.append('text')
+    .text(title)
+    .style('font-size', '1.8em')
+    .style('font-weight', 'bold')
+    .style('display', 'block')
+    .attr('class', 'title')
+
+    let radioGroup = head.append('div')
+    radioGroup
+      .append('input')
+      .attr('name', 'radiogroup')
+      .attr('type', 'radio')
+      .attr('value', 'disabled')
+    radioGroup.append('text').attr('for', 'disabled').text('Disabled')
+  
+    radioGroup
+      .append('input')
+      .attr('name', 'radiogroup')
+      .attr('type', 'radio')
+      .attr('value', 'regular')
+      .attr('checked', 'checked')
+    radioGroup.append('text').attr('for', 'regular').text('Regular')
+  
+
+  const map = select("#" + id)
     .append("svg")
-    .attr('viewBox', [0, 0, width, height])
+    .attr('viewBox', [(width/4), -50, width, height])
+    .attr('width', width*1.5)
+    .attr('height', height*1.5)
+    .style('background-color', 'transparent ')
 
-  const g = svg.append('g')
+  const g = map.append('g')
 
-  const gemeentes = g
-    .append('g')
-    .attr('fill', '#7a7a7a')
-    .selectAll('path')
-    .data(feature(mapData, mapData.objects.gemeente_2020).features)
-    .join('path')
-    .attr('d', path);
-
-  svg.selectAll('circle')
+  map.selectAll('circle')
     .data(allSpaces)
     .enter()
     .append('circle')
     .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
     .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
     .attr('r', '4px')
-    .attr('fill', 'red')
-    ;
+    .attr('stroke', 'black')
+    .attr('fill', colors[0])
+    .on('mouseover', function (d, i) {
+      select(this).selectAll('circle')
+        .attr('opacity', '0')
+      select('g').append('text')
+        .text(i.areadesc)
+        .style('font-weight', 'bold')
+        .style('display', 'block')
+        .attr('class', 'mapdescription')
+        .attr("transform", "translate( 150, 0)")
+    })
+    .on('mouseout', (d, i) =>{
+      selectAll('text[class="mapdescription"]').remove()
+    })
 
 
-  let radioGroup = select("#" + id).append('div')
+    g.append('g')
+    .attr('fill', '#7a7a7a')
+    .selectAll('path')
+    .data(feature(mapData, mapData.objects.gemeente_2020).features)
+    .join('path')
+    .attr('d', path);
 
-
-  radioGroup
-    .append('input')
-    .attr('name', 'radiogroup')
-    .attr('type', 'radio')
-    .attr('value', 'disabled')
-  radioGroup.append('text').attr('for', 'disabled').text('disabled')
-
-  radioGroup
-    .append('input')
-    .attr('name', 'radiogroup')
-    .attr('type', 'radio')
-    .attr('value', 'regular')
-    .attr('checked', 'checked')
-
-  radioGroup.append('text').attr('for', 'regular').text('regular')
-  
   // function as variables dont get hoisted,
   // so they need to be called early
   const ayo = (event) => {
@@ -283,40 +305,59 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     switch (pick) {
       case 'regular':
         console.log(pick)
-        svg.selectAll('circle').remove()
-        svg.selectAll('circle')
-        .data(allSpaces)
-        .enter()
-        .append('circle')
-        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-        .attr('r', '4px')
-        .attr('fill', 'red')
-        ;
+        map.selectAll('circle').remove()
+        map.selectAll('circle')
+          .data(allSpaces)
+          .enter()
+          .append('circle')
+          .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+          .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+          .attr('r', '4px')
+          .attr('stroke', 'black')
+          .attr('fill', colors[0])
+          .on('mouseover', function (d, i) {
+            select(this).selectAll('circle')
+              .attr('opacity', '0')
+            select('g').append('text')
+              .text(i.areadesc)
+              .style('font-weight', 'bold')
+              .style('display', 'block')
+              .attr('class', 'mapdescription')
+              .attr("transform", "translate( 150, 0)")
+          })
+          .on('mouseout', (d, i) =>{
+            selectAll('text[class="mapdescription"]').remove()
+          })
         break;
       case 'disabled':
         console.log(pick)
-        svg.selectAll('circle').remove()
-        svg.selectAll('circle')
-        .data(disabledSpaces)
-        .enter()
-        .append('circle')
-        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-        .attr('r', '4px')
-        .attr('fill', 'blue')
-        ;
-        break;
-    
-      default:
+        map.selectAll('circle').remove()
+        map.selectAll('circle')
+          .data(disabledSpaces)
+          .enter()
+          .append('circle')
+          .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+          .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+          .attr('r', '4px')
+          .attr('stroke', 'black')
+          .attr('fill', 'blue')
+          .on('mouseover', function (d, i) {
+            select(this).selectAll('circle')
+              .attr('opacity', '0')
+            select('g').append('text')
+              .text(i.areadesc)
+              .style('font-weight', 'bold')
+              .style('display', 'block')
+              .attr('class', 'mapdescription')
+              .attr("transform", "translate( 150, 0)")
+          })
+          .on('mouseout', (d, i) =>{
+            selectAll('text[class="mapdescription"]').remove()
+          })
         break;
     }
   }
-  
-  
   selectAll('input[name="radiogroup"').on('change', ayo)
-
-
 }
 // export function barchart(height, id, data) {
 //   const barWidth = 35;

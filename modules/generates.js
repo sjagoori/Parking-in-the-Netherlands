@@ -78,5 +78,5 @@ export async function generateMapchart() {
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
   let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
   let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
-  mapchart(geoParkinSpaces, disabledSpaces, mapData,'chart', 'Some title for the mapchart')
+  mapchart(geoParkinSpaces, disabledSpaces, mapData,'chart', 'Difference in parking spaces per driver type')
 }
