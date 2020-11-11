@@ -15,8 +15,11 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
   const width = 600
   const height = 550
 
-  let head = select("#" + id)
-
+  let head = select("#" + id).append('div')
+    .style('display', 'flex')
+    .style('justify-content', 'space-around')
+    .style('align-items', 'flex-end')
+    .style('margin-bottom', '20px')
   head.append('text')
     .text(title)
     .style('font-size', '1.8em')
@@ -24,28 +27,28 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .style('display', 'block')
     .attr('class', 'title')
 
-    let radioGroup = head.append('div')
-    radioGroup
-      .append('input')
-      .attr('name', 'radiogroup')
-      .attr('type', 'radio')
-      .attr('value', 'disabled')
-    radioGroup.append('text').attr('for', 'disabled').text('Disabled')
-  
-    radioGroup
-      .append('input')
-      .attr('name', 'radiogroup')
-      .attr('type', 'radio')
-      .attr('value', 'regular')
-      .attr('checked', 'checked')
-    radioGroup.append('text').attr('for', 'regular').text('Regular')
-  
+  let radioGroup = head.append('div')
+  radioGroup
+    .append('input')
+    .attr('name', 'radiogroup')
+    .attr('type', 'radio')
+    .attr('value', 'disabled')
+  radioGroup.append('text').attr('for', 'disabled').text('Disabled')
+
+  radioGroup
+    .append('input')
+    .attr('name', 'radiogroup')
+    .attr('type', 'radio')
+    .attr('value', 'regular')
+    .attr('checked', 'checked')
+  radioGroup.append('text').attr('for', 'regular').text('Regular')
+
 
   const map = select("#" + id)
     .append("svg")
-    .attr('viewBox', [(width/4), -50, width, height])
-    .attr('width', width*1.5)
-    .attr('height', height*1.5)
+    .attr('viewBox', [(width / 2.3), -50, width, height])
+    .attr('width', width * 1.5)
+    .attr('height', height * 1.5)
     .style('background-color', 'transparent ')
 
   const g = map.append('g')
@@ -67,14 +70,14 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
         .style('font-weight', 'bold')
         .style('display', 'block')
         .attr('class', 'mapdescription')
-        .attr("transform", "translate( 150, 0)")
+        .attr("transform", "translate( 260, 0)")
     })
-    .on('mouseout', (d, i) =>{
+    .on('mouseout', (d, i) => {
       selectAll('text[class="mapdescription"]').remove()
     })
 
 
-    g.append('g')
+  g.append('g')
     .attr('fill', '#7a7a7a')
     .selectAll('path')
     .data(feature(mapData, mapData.objects.gemeente_2020).features)
@@ -107,9 +110,9 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
               .style('font-weight', 'bold')
               .style('display', 'block')
               .attr('class', 'mapdescription')
-              .attr("transform", "translate( 150, 0)")
+              .attr("transform", "translate( 260, 0)")
           })
-          .on('mouseout', (d, i) =>{
+          .on('mouseout', (d, i) => {
             selectAll('text[class="mapdescription"]').remove()
           })
         break;
@@ -133,9 +136,9 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
               .style('font-weight', 'bold')
               .style('display', 'block')
               .attr('class', 'mapdescription')
-              .attr("transform", "translate( 150, 0)")
+              .attr("transform", "translate( 260, 0)")
           })
-          .on('mouseout', (d, i) =>{
+          .on('mouseout', (d, i) => {
             selectAll('text[class="mapdescription"]').remove()
           })
         break;

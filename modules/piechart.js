@@ -10,10 +10,15 @@ const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
  * @param {String} title - chart title
  */
 export function piechart(data, id, title) {
-  let width = 800
+  let width = 500
   let height = 300
 
-  select("#" + id).append('text')
+  let head = select("#" + id).append('div')
+  .style('margin-bottom', '20px')
+  .style('display', 'flex')
+  .style('justify-content', 'center')
+
+  head.append('text')
     .text(title)
     .style('font-size', '1.8em')
     .style('font-weight', 'bold')
@@ -21,10 +26,19 @@ export function piechart(data, id, title) {
     .attr('class', 'title')
 
   // add dimensions, otherwise it's overflow will be hidden
-  let svg = select("#" + id)
+
+  let container = select("#" + id).append('div')
+  .style('display', 'flex')
+  .style('justify-content', 'center')
+
+  // .style('tranform', 'translate(-50%)')
+  // .style('align-items', 'center')
+
+  let svg = container
     .append("svg")
     .attr('width', width)
     .attr('height', height)
+
 
   // Pie gen + data counts 
   let pie = d3.pie()
@@ -90,7 +104,7 @@ export function piechart(data, id, title) {
     .enter()
     .append('g')
     .attr("transform", function (d, i) {
-      return "translate(" + (width / 2.5) + "," + (i * legendMargin + 120) + ")";
+      return "translate(" + (width / 1.5) + "," + (i * legendMargin + 120) + ")";
     })
     .attr('class', 'legend')
 

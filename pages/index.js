@@ -7,7 +7,6 @@ const GlobalStyle = createGlobalStyle`
   body{
       padding:0;
       margin:0;
-      background-color: #FBF1F4;
   }
 `;
 
@@ -18,6 +17,10 @@ const ChartContainer = styled.div`
 const Chart = styled.div`
   margin-top: 10px;
   margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #D3D3D3;
+  background-color: #FFF;
+  border-radius: 4px;
 `
 
 export default class Index extends React.Component {

@@ -13,20 +13,25 @@ export function barchart(data, id, title) {
   let height = 1200
   const xValue = d => d.amount
   const yValue = d => d.name
-  const margin = { top: 20, right: 20, bottom: 20, left: 100 }
+  const margin = { top: 20, right: 20, bottom: 20, left: 200 }
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
-  const xScale = scaleLinear()
-    .domain([0, max(data, xValue)])
-    .range([0, innerWidth])
+  let head = select("#" + id).append('div')
+    .style('display', 'flex')
+    .style('justify-content', 'space-around')
+    .style('align-items', 'flex-end')
+    .style('margin-bottom', '20px')
 
-  const yScale = scaleBand()
-    .domain(data.map(yValue))
-    .range([0, innerHeight])
-    .padding(0.2)
 
-  let dropdownMenu = select("#" + id).append('select')
+  head.append('text')
+    .text(title)
+    .style('font-size', '1.8em')
+    .style('font-weight', 'bold')
+    .style('display', 'block')
+    .attr('class', 'title')
+
+  let dropdownMenu = head.append('select')
     .attr('name', 'province-list')
     .attr('id', 'province-list')
     .attr('selected', 'Zeeland')
@@ -40,12 +45,14 @@ export function barchart(data, id, title) {
   options.text(d => d.province)
     .attr('value', d => d.province)
 
-  select("#" + id).append('text')
-    .text(title)
-    .style('font-size', '1.8em')
-    .style('font-weight', 'bold')
-    .style('display', 'block')
-    .attr('class', 'title')
+  const xScale = scaleLinear()
+    .domain([0, max(data, xValue)])
+    .range([0, innerWidth])
+
+  const yScale = scaleBand()
+    .domain(data.map(yValue))
+    .range([0, innerHeight])
+    .padding(0.2)
 
   // add dimensions, otherwise it's overflow will be hidden
   let svg = select("#" + id)
@@ -57,8 +64,8 @@ export function barchart(data, id, title) {
   const g = svg.append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-  g.append('g').call(axisLeft(yScale)).style('color', 'blue')
-  g.append('g').call(axisTop(xScale)).style('color', 'blue')
+  g.append('g').call(axisLeft(yScale)).style('color', 'black').style('font-size', '1em')
+  g.append('g').call(axisTop(xScale)).style('color', 'black')
 
   g.selectAll('rect')
     .data(data)
@@ -67,6 +74,8 @@ export function barchart(data, id, title) {
     .attr("width", d => xScale(xValue(d)))
     .attr("height", yScale.bandwidth())
     .style('fill', colors[1])
+    .style('stroke', 'black')
+    .style('stroke-width', '.3px')
     .append('text')
 
   const update = (selectedOption) => {
@@ -97,9 +106,11 @@ export function barchart(data, id, title) {
       .attr("height", yScale.bandwidth())
       .style('fill', colors[1])
       .append('text')
+      .style('stroke', 'black')
+      .style('stroke-width', '.3px')
 
-    g.append('g').call(axisLeft(yScale)).style('color', 'blue')
-    g.append('g').call(axisTop(xScale)).style('color', 'blue')
+      g.append('g').call(axisLeft(yScale)).style('color', 'black').style('font-size', '1em')
+      g.append('g').call(axisTop(xScale)).style('color', 'black')
   }
 
   select('#province-list').on('change', (d) => {
@@ -136,7 +147,7 @@ export function barchart(data, id, title) {
 //       .attr('type', 'radio')
 //       .attr('value', 'disabled')
 //     radioGroup.append('text').attr('for', 'disabled').text('Disabled')
-  
+
 //     radioGroup
 //       .append('input')
 //       .attr('name', 'radiogroup')
@@ -144,7 +155,7 @@ export function barchart(data, id, title) {
 //       .attr('value', 'regular')
 //       .attr('checked', 'checked')
 //     radioGroup.append('text').attr('for', 'regular').text('Regular')
-  
+
 
 //   const map = select("#" + id)
 //     .append("svg")
