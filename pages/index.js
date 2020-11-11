@@ -21,7 +21,11 @@ const Chart = styled.div`
   border: 1px solid #D3D3D3;
   background-color: #FFF;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
+
 
 export default class Index extends React.Component {
   constructor(props) {

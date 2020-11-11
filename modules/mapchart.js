@@ -46,9 +46,9 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
 
   const map = select("#" + id)
     .append("svg")
-    .attr('viewBox', [(width / 2.3), -50, width, height])
-    .attr('width', width * 1.5)
-    .attr('height', height * 1.5)
+    .attr('viewBox', [200, -20, width, height])
+    .attr('width', 'auto')
+    .attr('height', 'auto')
     .style('background-color', 'transparent ')
 
   const g = map.append('g')
