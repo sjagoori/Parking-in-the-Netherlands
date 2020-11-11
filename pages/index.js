@@ -1,5 +1,6 @@
 import React from 'react'
 import { generateBarchart, generatePiechart, generateMapchart } from '../modules/generates'
+import styles from '../styles/index.module.css'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -14,14 +15,13 @@ export default class Index extends React.Component {
 
   async componentDidMount() {
     console.warn('mounted')
-    generateBarchart()
-    generatePiechart()
     generateMapchart()
+    generatePiechart()
+    generateBarchart()
   }
 
   render() {
-    const resultView = <div>
-      {/* <h1>Hello world!</h1> */}
+    const resultView = <div className={styles.container}>
       <div id="mapchart"></div>
       <div id="piechart"></div>
       <div id="barchart"></div>
