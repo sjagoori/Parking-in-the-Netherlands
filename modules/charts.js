@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { select, pie, arc, max, scaleLinear, scaleBand, axisLeft, axisTop, axisBottom, geoMercator, geoPath } from 'd3';
+import { select, pie, arc, max, scaleLinear, scaleBand, axisLeft, axisTop, axisBottom, geoMercator, geoPath, selectAll } from 'd3';
 import { feature } from 'topojson';
 
 const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
@@ -255,47 +255,69 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('fill', 'red')
     ;
 
-  // const reset = () => {
-  //   gemeentes.transition().style('fill', null);
-  //   console.log(gemeentes)
-  //   svg
-  //     .transition()
-  //     .duration(750)
-  //     .call(
-  //       d3zoom.transform,
-  //       zoomIdentity,
-  //       zoomTransform(svg.node()).invert([width / 2, height / 2])
-  //     );
-  // }
 
-  // const zoomed = (event) => {
-  //   const { transform } = event;
-  //   g.attr('transform', transform);
-  //   g.attr('stroke-width', 1 / transform.k);
-  // }
+  let radioGroup = select("#" + id).append('div')
 
-  // const clicked = (event, d) => {
-  //   console.log(gemeentes)
-  //   const [[x0, y0], [x1, y1]] = path.bounds(d);
-  //   event.stopPropagation();
-  //   gemeentes.transition().style('fill', null);
-  //   d3.select(this).transition().style('fill', 'rgb(60,179,113)');
-  //   svg
-  //     .transition()
-  //     .duration(750)
-  //     .call(
-  //       d3zoom.transform,
-  //       d3.zoomIdentity
-  //         .translate(width / 2, height / 2)
-  //         .scale(
-  //           Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height))
-  //         )
-  //         .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-  //       d3.pointer(event, svg.node())
-  //     );
-  // }
+
+  radioGroup
+    .append('input')
+    .attr('name', 'radiogroup')
+    .attr('type', 'radio')
+    .attr('value', 'disabled')
+  radioGroup.append('text').attr('for', 'disabled').text('disabled')
+
+  radioGroup
+    .append('input')
+    .attr('name', 'radiogroup')
+    .attr('type', 'radio')
+    .attr('value', 'regular')
+    .attr('checked', 'checked')
+
+  radioGroup.append('text').attr('for', 'regular').text('regular')
+  
+  // function as variables dont get hoisted,
+  // so they need to be called early
+  const ayo = (event) => {
+    let pick = event.target.defaultValue
+
+    switch (pick) {
+      case 'regular':
+        console.log(pick)
+        svg.selectAll('circle').remove()
+        svg.selectAll('circle')
+        .data(allSpaces)
+        .enter()
+        .append('circle')
+        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+        .attr('r', '4px')
+        .attr('fill', 'red')
+        ;
+        break;
+      case 'disabled':
+        console.log(pick)
+        svg.selectAll('circle').remove()
+        svg.selectAll('circle')
+        .data(disabledSpaces)
+        .enter()
+        .append('circle')
+        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+        .attr('r', '4px')
+        .attr('fill', 'blue')
+        ;
+        break;
+    
+      default:
+        break;
+    }
+  }
+  
+  
+  selectAll('input[name="radiogroup"').on('change', ayo)
+
+
 }
-
 // export function barchart(height, id, data) {
 //   const barWidth = 35;
 //   const barOffset = 5
