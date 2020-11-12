@@ -42,6 +42,7 @@ export const generateHeadBlock = (id, title, data) => {
     .style('background-color', 'transparent')
     .style('border', '1px solid black')
     .style('border-radius', '3px')
+    .style('padding', '5px')
 
 
   const options = dropdownMenu.selectAll('option')
