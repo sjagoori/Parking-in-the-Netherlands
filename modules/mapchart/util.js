@@ -1,18 +1,21 @@
-import { select } from 'd3'
-import {projection, colors} from './mapchart'
+import { select, selectAll } from 'd3'
+import { projection, colors } from './mapchart'
 
-
-export const handleFilter = (d, allSpaces, disabledSpaces, map) => {
+/**
+ * Function handles filter for map chart
+ * @param {Event} d - radiobutton event
+ * @param {Object} allSpaces - dataset
+ * @param {Object} disabledSpaces - dataset
+ */
+export const handleFilter = (d, allSpaces, disabledSpaces) => {
   const pick = d.target.defaultValue
-  // console.log(d.path[3].childNodes[1])
-  console.log(map)
-
+  const map = select("#mapchart").select('svg')
 
   switch (pick) {
     case 'regular':
       console.log(pick)
-      map.remove()
-      map
+      map.selectAll('circle').remove()
+      map.selectAll('circle')
         .data(allSpaces)
         .enter()
         .append('circle')
@@ -27,8 +30,8 @@ export const handleFilter = (d, allSpaces, disabledSpaces, map) => {
       break;
     case 'disabled':
       console.log(pick)
-      map.remove()
-      map
+      map.selectAll('circle').remove()
+      map.selectAll('circle').enter()
         .data(disabledSpaces)
         .enter()
         .append('circle')
