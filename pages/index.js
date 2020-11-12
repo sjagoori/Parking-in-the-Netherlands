@@ -33,16 +33,6 @@ const Chart = styled.div`
 `
 
 export default class Index extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: {
-        state: true,
-        results: ['loading']
-      }
-    }
-  }
-
   async componentDidMount() {
     console.warn('mounted')
     generateMapchart()
@@ -57,15 +47,10 @@ export default class Index extends React.Component {
       <Chart id="barchart"></Chart>
     </ChartContainer>
 
-    const loadView = <div>
-      <h1>Loading</h1>
-    </div>
-
     return (
       <>
         <GlobalStyle />
-        {/* {loadView} */}
-        { this.state.data.state ? resultView : loadView}
+        {resultView}
       </>)
   }
 }
