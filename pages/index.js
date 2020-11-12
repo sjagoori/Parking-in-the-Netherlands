@@ -26,7 +26,6 @@ const Chart = styled.div`
   justify-content: center;
 `
 
-
 export default class Index extends React.Component {
   constructor(props) {
     super(props)
@@ -41,8 +40,8 @@ export default class Index extends React.Component {
   async componentDidMount() {
     console.warn('mounted')
     generateMapchart()
-    generatePiechart()
-    generateBarchart()
+    // generatePiechart()
+    // generateBarchart()
   }
 
   render() {

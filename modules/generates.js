@@ -1,6 +1,6 @@
-import { mapchart } from './mapchart'
-import { piechart } from './piechart'
-import { barchart } from './barchart'
+import { mapchart } from './mapchart/mapchart'
+import { piechart } from './piechart/piechart'
+import { barchart } from './barchart/barchart'
 import { getData, filterDisabled, filterAreaIdDisabled, matchAreaId, getLocationNames, findProvince } from './util'
 
 //TODO return boolean for loading state in index.js
