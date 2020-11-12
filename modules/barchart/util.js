@@ -1,18 +1,6 @@
 import { select, max, scaleLinear, scaleBand, axisLeft, axisTop } from 'd3';
 const colors = ['#F7B332', '#FF333D']
 
-export const handleMouseOver = (d, i) => {
-
-}
-
-export const mouseMove = (event, d, i) => {
-
-}
-
-export const handleMouseOut = (d, i) => {
-
-}
-
 /**
  * Function generates head block for charts
  * @param {String} id - chart to append the title on
@@ -44,14 +32,13 @@ export const generateHeadBlock = (id, title, data) => {
     .style('border-radius', '3px')
     .style('padding', '5px')
 
-
   const options = dropdownMenu.selectAll('option')
-    .data(data)
+    .data([...new Set(data.map(key => key.province))])
     .enter()
     .append('option')
 
-  options.text(d => d.province)
-    .attr('value', d => d.province)
+  options.text(d => d)
+    .attr('value', d => d)
     .style('background-color', '#FEEECC')
 
   return head
@@ -64,7 +51,7 @@ export const generateHeadBlock = (id, title, data) => {
  * @param {SVGObject} g - group
  * @param {Object} inners - innerWidth and innerHeight
  */
-export const update = (e, selectedOption, data, g, inners, svg) => {
+export const update = (e, selectedOption, data, g, inners) => {
   let a = data.filter(elem => elem.province == selectedOption)
 
   const xValue = a => a.amount
@@ -77,10 +64,10 @@ export const update = (e, selectedOption, data, g, inners, svg) => {
   const yScale = scaleBand()
     .domain(a.map(yValue))
     .range([0, (a.length * 30)])
-    .padding(0.2)
+    .padding(0.1)
 
   select(e.path[2].childNodes[1])
-  .attr('height', (a.length * 33) + "px")
+  .attr('height', (a.length * 35) + "px")
 
   g.selectAll('g').remove()
   g.selectAll('rect').remove()

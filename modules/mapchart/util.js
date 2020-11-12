@@ -44,10 +44,9 @@ export const handleMouseOut = (e, i) => {
 export const handleFilter = (d, allSpaces, disabledSpaces) => {
   const pick = d.target.defaultValue
   const map = select("#mapchart").select('svg')
-  console.log(pick)
+
   switch (pick) {
     case 'regular':
-      console.log(pick)
       map.selectAll('circle').remove()
       map.selectAll('circle')
         .data(allSpaces)
@@ -63,7 +62,6 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
         .on('mouseout', handleMouseOut)
       break;
     case 'disabled':
-      console.log(pick)
       map.selectAll('circle').remove()
       map.selectAll('circle')
         .data(disabledSpaces)
