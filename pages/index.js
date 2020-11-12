@@ -40,8 +40,8 @@ export default class Index extends React.Component {
   async componentDidMount() {
     console.warn('mounted')
     generateMapchart()
-    // generatePiechart()
-    // generateBarchart()
+    generatePiechart()
+    generateBarchart()
   }
 
   render() {

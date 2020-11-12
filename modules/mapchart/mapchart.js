@@ -1,11 +1,12 @@
-import { select, pie, arc, max, scaleLinear, scaleBand, axisLeft, axisTop, axisBottom, geoMercator, geoPath, selectAll } from 'd3';
+import { select, geoMercator, geoPath, selectAll } from 'd3';
 import { feature } from 'topojson';
-import { generateHeadBlock, handleFilter } from './util';
+import { generateHeadBlock, handleFilter, handleMouseOver, handleMouseOut } from './util';
 export const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
 
 /**
  * Map chart
+ * @see {@link https://vizhub.com/sreen020/f29bf760c4ef40efaa0343794f63e1d0?edit=files&file=index.js} - used reference
  * @param {Object} data - dataset
  * @param {String} id - element id for chart
  * @param {String} title - chart title
@@ -17,7 +18,7 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
 
   generateHeadBlock(id, title)
 
-  const map = select("#" + id)
+  const svg = select("#" + id)
     .append("svg")
     .attr('viewBox', [200, -20, width, height])
     .attr('width', 'auto')
@@ -25,9 +26,9 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('class', 'map')
     .style('background-color', 'transparent ')
 
-  const g = map.append('g')
-
-  map.selectAll('circle')
+  const g = svg.append('g')
+  console.log(svg)
+  svg.selectAll('circle')
     .data(allSpaces)
     .enter()
     .append('circle')
@@ -36,7 +37,8 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('r', '4px')
     .attr('stroke', 'black')
     .attr('fill', colors[0])
-
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut)
 
   g.append('g')
     .attr('fill', '#7a7a7a')
@@ -45,48 +47,5 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .join('path')
     .attr('d', path);
 
-  
-  selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, allSpaces, disabledSpaces, map))
+  selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, allSpaces, disabledSpaces))
 }
-
-
-// function as variables dont get hoisted,
-  // so they need to be called early
-  // const ayo = (event) => {
-  //   let pick = event.target.defaultValue
-
-  //   switch (pick) {
-  //     case 'regular':
-  //       console.log(pick)
-  //       map.selectAll('circle').remove()
-  //       map.selectAll('circle')
-  //         .data(allSpaces)
-  //         .enter()
-  //         .append('circle')
-  //         .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-  //         .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-  //         .attr('r', '4px')
-  //         .attr('stroke', 'black')
-  //         .attr('fill', colors[0])
-  //         // .on('mouseover', handleMouseOver)
-  //         // .on('mousemove', mouseMove)
-  //         // .on('mouseout', handleMouseOut)
-  //       break;
-  //     case 'disabled':
-  //       console.log(pick)
-  //       map.selectAll('circle').remove()
-  //       map.selectAll('circle')
-  //         .data(disabledSpaces)
-  //         .enter()
-  //         .append('circle')
-  //         .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-  //         .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-  //         .attr('r', '4px')
-  //         .attr('stroke', 'black')
-  //         .attr('fill', 'blue')
-  //         // .on('mouseover', handleMouseOver)
-  //         // .on('mousemove', mouseMove)
-  //         // .on('mouseout', handleMouseOut)
-  //       break;
-  //   }
-  // }

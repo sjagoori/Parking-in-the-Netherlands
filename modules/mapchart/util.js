@@ -1,5 +1,40 @@
 import { select, selectAll } from 'd3'
-import { projection, colors } from './mapchart'
+import { projection } from './mapchart'
+
+/**
+ * Function handles mouseover event
+ * @see {@link https://bl.ocks.org/d3noob/a22c42db65eb00d4e369} - used reference
+ * @param {Event} e - mouseover  event
+ * @param {Object} i - data
+ */
+export const handleMouseOver = (e, i) => {
+  const ttcontainer = select("body").append("div")
+
+  const tt = ttcontainer
+    .attr("id", "tooltip")
+    .style('z-index', '100')
+
+  tt
+    .append('p')
+    .text(i.areadesc)
+    .style('opacity', 1)
+    .style('background-color', 'white')
+    .style('position', 'absolute')
+    .style('padding', '5px')
+    .style('border', '1px solid black')
+    .style('border-radius', '5px')
+    .style('top', (e.pageY) + 'px')
+    .style('left', (e.pageX) + 'px')
+}
+
+/**
+ * Functon handles mouseout event
+ * @param {Event} e - unused to fetch default parm
+ * @param {Object} i - data
+ */
+export const handleMouseOut = (e, i) => {
+  selectAll('#tooltip').remove()
+}
 
 /**
  * Function handles filter for map chart
@@ -24,9 +59,8 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
         .attr('r', '4px')
         .attr('stroke', 'black')
         .attr('fill', 'yellow')
-      // .on('mouseover', handleMouseOver)
-      // .on('mousemove', mouseMove)
-      // .on('mouseout', handleMouseOut)
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut)
       break;
     case 'disabled':
       console.log(pick)
@@ -40,13 +74,17 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
         .attr('r', '4px')
         .attr('stroke', 'black')
         .attr('fill', 'blue')
-      // .on('mouseover', handleMouseOver)
-      // .on('mousemove', mouseMove)
-      // .on('mouseout', handleMouseOut)
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut)
       break;
   }
 }
 
+/**
+ * Function generated headblock 
+ * @param {String} id - chart id
+ * @param {String} title - chart title
+ */
 export const generateHeadBlock = (id, title) => {
   const head = select("#" + id).append('div')
     .style('display', 'flex')
