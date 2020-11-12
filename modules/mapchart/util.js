@@ -12,7 +12,6 @@ export const handleMouseOver = (e, i) => {
 
   const tt = ttcontainer
     .attr("id", "tooltip")
-    .style('z-index', '100')
 
   tt
     .append('p')
