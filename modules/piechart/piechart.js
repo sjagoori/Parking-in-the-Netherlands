@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { generateHeadBlock, generateContainerSVG, handleMouseOver, handleMouseOut, generateLegend } from './util.js'
-const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
+const colors = ['#F7B332', '#FF333D']
 
 /**
  * Piechart

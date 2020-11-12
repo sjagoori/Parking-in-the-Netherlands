@@ -1,4 +1,5 @@
 import { select, max, scaleLinear, scaleBand, axisLeft, axisTop } from 'd3';
+const colors = ['#F7B332', '#FF333D']
 
 export const handleMouseOver = (d, i) => {
 
@@ -82,10 +83,10 @@ export const update = (selectedOption, data, g, inners) => {
     .attr('y', d => yScale(yValue(d)))
     .attr("width", d => xScale(xValue(d)))
     .attr("height", yScale.bandwidth())
-    .style('fill', '#F15E6B')
-    .append('text')
+    .style('fill', colors[1])
     .style('stroke', 'black')
-    .style('stroke-width', '.3px')
+    .style('stroke-width', '.5px')
+    .append('text')
 
   g.append('g').call(axisLeft(yScale)).style('color', 'black').style('font-size', '1em')
   g.append('g').call(axisTop(xScale)).style('color', 'black')

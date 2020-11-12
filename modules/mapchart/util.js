@@ -44,7 +44,7 @@ export const handleMouseOut = (e, i) => {
 export const handleFilter = (d, allSpaces, disabledSpaces) => {
   const pick = d.target.defaultValue
   const map = select("#mapchart").select('svg')
-
+  console.log(pick)
   switch (pick) {
     case 'regular':
       console.log(pick)
@@ -57,14 +57,15 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
         .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
         .attr('r', '4px')
         .attr('stroke', 'black')
-        .attr('fill', 'yellow')
-      .on('mouseover', handleMouseOver)
-      .on('mouseout', handleMouseOut)
+        .style('stroke-width', '.5px')
+        .attr('fill', '#FF333D')
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut)
       break;
     case 'disabled':
       console.log(pick)
       map.selectAll('circle').remove()
-      map.selectAll('circle').enter()
+      map.selectAll('circle')
         .data(disabledSpaces)
         .enter()
         .append('circle')
@@ -72,9 +73,10 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
         .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
         .attr('r', '4px')
         .attr('stroke', 'black')
-        .attr('fill', 'blue')
-      .on('mouseover', handleMouseOver)
-      .on('mouseout', handleMouseOut)
+        .style('stroke-width', '.5px')
+        .attr('fill', '#FF333D')
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut)
       break;
   }
 }
@@ -97,19 +99,47 @@ export const generateHeadBlock = (id, title) => {
     .style('display', 'block')
     .attr('class', 'title')
 
-  const radioGroup = head.append('div')
-  radioGroup
-    .append('input')
+  const container = head.append('div')
+    .style('display', 'flex')
+    .style('width', '200px')
+    .style('justify-content', 'space-around')
+    .attr('class', 'radiocontainer')
+
+  const group1 = container.append('div')
+
+  const group2 = container.append('div')
+
+
+  const dRadio = group1.append('input')
     .attr('name', 'radiogroup')
     .attr('type', 'radio')
     .attr('value', 'disabled')
-  radioGroup.append('text').attr('for', 'disabled').text('Disabled')
+    .attr('id', 'disabled')
+    .style('display', 'none')
 
-  radioGroup
-    .append('input')
+  const dLabel = group1.append('label')
+  dLabel.attr('for', 'disabled')
+    .text('Disabled')
+    .style('display', 'block')
+    .style('cursor', 'pointer')
+
+  const rRadio = group2.append('input')
     .attr('name', 'radiogroup')
     .attr('type', 'radio')
     .attr('value', 'regular')
+    .attr('id', 'regular')
     .attr('checked', 'checked')
-  radioGroup.append('text').attr('for', 'regular').text('Regular')
+    .style('display', 'none')
+
+
+  const rLabel = group2.append('label')
+  rLabel.attr('for', 'regular')
+    .text('Regular')
+    .style('display', 'block')
+    .style('cursor', 'pointer')
+
+
+
+
+
 }

@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
   body{
       padding:0;
       margin:0;
+      background-color: #FEEECC;
   }
 `;
 
@@ -18,12 +19,17 @@ const Chart = styled.div`
   margin-top: 10px;
   margin-bottom: 40px;
   padding: 20px;
-  border: 1px solid #D3D3D3;
+  border: 1.8px solid black;
   background-color: #FFF;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #FEEECC;
+
+  .radiocontainer input[type="radio"]:checked+label {
+    border-bottom: 2px solid red
+  }
 `
 
 export default class Index extends React.Component {

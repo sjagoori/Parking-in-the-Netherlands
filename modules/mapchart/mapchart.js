@@ -13,22 +13,21 @@ export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
  */
 export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
   const path = geoPath().projection(projection)
-  const width = 600
-  const height = 550
+  const width = 500
+  const height = 500
 
   generateHeadBlock(id, title)
 
-  const svg = select("#" + id)
+  const map = select("#" + id)
     .append("svg")
-    .attr('viewBox', [200, -20, width, height])
+    .attr('viewBox', [250, 0, width, height])
     .attr('width', 'auto')
     .attr('height', 'auto')
     .attr('class', 'map')
     .style('background-color', 'transparent ')
 
-  const g = svg.append('g')
-  console.log(svg)
-  svg.selectAll('circle')
+  const g = map.append('g')
+  map.selectAll('circle')
     .data(allSpaces)
     .enter()
     .append('circle')
@@ -36,12 +35,15 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
     .attr('r', '4px')
     .attr('stroke', 'black')
-    .attr('fill', colors[0])
+    .style('stroke-width', '.5px')
+    .attr('fill', '#FF333D')
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
   g.append('g')
-    .attr('fill', '#7a7a7a')
+    .attr('fill', 'transparent')
+    .attr('stroke', 'black')
+    .style('stroke-width', '.5px')
     .selectAll('path')
     .data(feature(mapData, mapData.objects.gemeente_2020).features)
     .join('path')

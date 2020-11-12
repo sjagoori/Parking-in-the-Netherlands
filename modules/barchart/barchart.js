@@ -1,7 +1,7 @@
 import { select, max, scaleLinear, scaleBand, axisLeft, axisTop } from 'd3';
 import { update, generateHeadBlock } from './util.js'
 
-const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
+const colors = ['#F7B332', '#FF333D']
 /**
  * Barchart
  * @param {Object} data - dataset
@@ -49,7 +49,7 @@ export function barchart(data, id, title) {
     .attr("height", yScale.bandwidth())
     .style('fill', colors[1])
     .style('stroke', 'black')
-    .style('stroke-width', '.3px')
+    .style('stroke-width', '.5px')
     .append('text')
 
   select('#province-list').on('change', (d) => {

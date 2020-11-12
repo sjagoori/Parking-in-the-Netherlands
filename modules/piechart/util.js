@@ -1,5 +1,5 @@
 import { select } from 'd3';
-const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
+const colors = ['#F7B332', '#FF333D']
 
 /**
  * Function handles mouse over event
@@ -70,6 +70,7 @@ export const generateContainerSVG = (id, width, height) => {
 
 /**
  * Function generates a legend for chart
+ * @see {@link https://stackoverflow.com/questions/32298837/how-to-add-a-nice-legend-to-a-d3-pie-chart} - reference
  * @param {Object} svg - D3 selectable SVGElement/HTMLElement 
  * @param {Object} data - dataset
  * @param {Number} width - width used to calculate placement
