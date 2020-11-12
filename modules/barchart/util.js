@@ -31,7 +31,7 @@ export const generateHeadBlock = (id, title, data) => {
     .style('border', '1px solid black')
     .style('border-radius', '3px')
     .style('padding', '5px')
-    .style('cursor', 'pointer')
+    .style('cursor  ', 'pointer')
 
   const options = dropdownMenu.selectAll('option')
     .data([...new Set(data.map(key => key.province))])
@@ -86,7 +86,7 @@ export const update = (e, selectedOption, data, g, inners) => {
     .style('stroke-width', '.5px')
     .append('text')
 
-  g.append('g').call(axisLeft(yScale)).style('color', 'black').style('font-size', '1em')
-  g.append('g').call(axisTop(xScale)).style('color', 'black')
+  g.append('g').call(axisLeft(yScale)).style('color', 'black')
+  g.append('g').call(axisTop(xScale)).style('color', 'black').style('font-size', '.8em')
 
 }

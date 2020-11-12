@@ -4,6 +4,7 @@ import { update, generateHeadBlock } from './util.js'
 const colors = ['#F7B332', '#FF333D']
 /**
  * Barchart
+ * @see {@link https://www.youtube.com/watch?v=NlBt-7PuaLk} - code reference
  * @param {Object} data - dataset
  * @param {String} id - element id for chart
  * @param {String} title - chart title
@@ -54,7 +55,7 @@ export function barchart(data, id, title) {
     .append('text')
 
   select('#province-list').on('change', (d) => {
-    update(event,select('#province-list').property("value"),
+    update(event, select('#province-list').property("value"),
       data,
       g,
       { innerWidth: innerWidth, innerHeight: innerHeight },
