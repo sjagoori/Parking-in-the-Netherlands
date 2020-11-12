@@ -64,9 +64,9 @@ export const generateHeadBlock = (id, title, data) => {
  * @param {SVGObject} g - group
  * @param {Object} inners - innerWidth and innerHeight
  */
-export const update = (selectedOption, data, g, inners) => {
+export const update = (e, selectedOption, data, g, inners, svg) => {
   let a = data.filter(elem => elem.province == selectedOption)
-  console.log(typeof inners)
+
   const xValue = a => a.amount
   const yValue = a => a.name
 
@@ -76,9 +76,11 @@ export const update = (selectedOption, data, g, inners) => {
 
   const yScale = scaleBand()
     .domain(a.map(yValue))
-    .range([0, inners.innerHeight])
+    .range([0, (a.length * 30)])
     .padding(0.2)
 
+  select(e.path[2].childNodes[1])
+  .attr('height', (a.length * 33) + "px")
 
   g.selectAll('g').remove()
   g.selectAll('rect').remove()
@@ -87,9 +89,10 @@ export const update = (selectedOption, data, g, inners) => {
   g.selectAll('rect')
     .data(a)
     .enter().append('rect')
+    .attr('class', 'rect')
     .attr('y', d => yScale(yValue(d)))
     .attr("width", d => xScale(xValue(d)))
-    .attr("height", yScale.bandwidth())
+    .attr("height", (yScale.bandwidth()))
     .style('fill', colors[1])
     .style('stroke', 'black')
     .style('stroke-width', '.5px')

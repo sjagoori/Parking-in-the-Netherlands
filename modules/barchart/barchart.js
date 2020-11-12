@@ -9,30 +9,31 @@ const colors = ['#F7B332', '#FF333D']
  * @param {String} title - chart title
  */
 export function barchart(data, id, title) {
+  let a = data.filter(elem => elem.province == 'Limburg')
   let width = 600
-  let height = 1200
+  let height = 700
   const xValue = d => d.amount
   const yValue = d => d.name
-  const margin = { top: 20, right: 20, bottom: 20, left: 200 }
+  const margin = { top: 20, right: 20, bottom: 20, left: 110 }
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
   generateHeadBlock(id, title, data)
 
   const xScale = scaleLinear()
-    .domain([0, max(data, xValue)])
+    .domain([0, max(a, xValue)])
     .range([0, innerWidth])
 
   const yScale = scaleBand()
-    .domain(data.map(yValue))
-    .range([0, innerHeight])
+    .domain(a.map(yValue))
+    .range([0, (a.length * 30)])
     .padding(0.2)
 
   // add dimensions, otherwise it's overflow will be hidden
   let svg = select("#" + id)
     .append("svg")
     .attr('width', width)
-    .attr('height', height)
+    .attr('height', (a.length * 33) + "px")
     .append('g')
 
   const g = svg.append('g')
@@ -42,7 +43,7 @@ export function barchart(data, id, title) {
   g.append('g').call(axisTop(xScale)).style('color', 'black')
 
   g.selectAll('rect')
-    .data(data)
+    .data(a)
     .enter().append('rect')
     .attr('y', d => yScale(yValue(d)))
     .attr("width", d => xScale(xValue(d)))
@@ -53,10 +54,11 @@ export function barchart(data, id, title) {
     .append('text')
 
   select('#province-list').on('change', (d) => {
-    update(select('#province-list').property("value"),
+    update(event,select('#province-list').property("value"),
       data,
       g,
-      { innerWidth: innerWidth, innerHeight: innerHeight }
+      { innerWidth: innerWidth, innerHeight: innerHeight },
+      svg
     )
   })
 }

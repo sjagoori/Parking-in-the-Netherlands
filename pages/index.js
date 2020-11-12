@@ -18,7 +18,7 @@ const ChartContainer = styled.div`
 const Chart = styled.div`
   margin-top: 10px;
   margin-bottom: 40px;
-  padding: 20px;
+  padding: 30px;
   border: 1.8px solid black;
   background-color: #FFF;
   border-radius: 4px;
@@ -32,11 +32,12 @@ const Chart = styled.div`
   }
 `
 
+
 export default class Index extends React.Component {
   async componentDidMount() {
     console.warn('mounted')
-    generateMapchart()
-    generatePiechart()
+    // generateMapchart()
+    // generatePiechart()
     generateBarchart()
   }
 
