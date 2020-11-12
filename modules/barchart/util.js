@@ -37,7 +37,12 @@ export const generateHeadBlock = (id, title, data) => {
   const dropdownMenu = head.append('select')
     .attr('name', 'province-list')
     .attr('id', 'province-list')
+    .attr('class', 'province-list')
     .attr('selected', 'Zeeland')
+    .style('background-color', 'transparent')
+    .style('border', '1px solid black')
+    .style('border-radius', '3px')
+
 
   const options = dropdownMenu.selectAll('option')
     .data(data)
@@ -46,6 +51,7 @@ export const generateHeadBlock = (id, title, data) => {
 
   options.text(d => d.province)
     .attr('value', d => d.province)
+    .style('background-color', '#FEEECC')
 
   return head
 }
