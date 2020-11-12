@@ -13,18 +13,18 @@ export async function generateBarchart() {
   let provinceData = await getData('https://opendata.rdw.nl/resource/ygq4-hh5q.json')
 
   let a = getLocationNames(geoParkinSpaces)
-  let u = [...new Set(a)]
-  let b = []
-  u.map(word => {
-    let p = findProvince(word, provinceData)
-    b.push({
-      name: word,
-      amount: a.reduce((k, i) => { return k + (i === word) }, 0),
-      province: p != undefined ? p : 'Anders' 
+  let uniques = [...new Set(a)]
+  let dataset = []
+  uniques.map(cityName => {
+    let province = findProvince(cityName, provinceData)
+    dataset.push({
+      name: cityName,
+      amount: a.reduce((k, i) => { return k + (i === cityName) }, 0),
+      province: province != undefined ? province : 'Anders' 
     })
   })
   
-  barchart(b, 'barchart', 'Parkingspace dispresion per city per province')
+  barchart(dataset, 'barchart', 'Parkingspace dispresion per city per province')
 }
 
 /**

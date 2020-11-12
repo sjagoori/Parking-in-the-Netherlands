@@ -35,9 +35,9 @@ export function filterAreaIdDisabled(data) {
 }
 
 /**
- * Function returns object based on 2 object matching areaid
- * @param {Object} data - dataset of parkingspaces
- * @param {Object} data - dataset of parkingspaces
+ * Function returns object based on 2 objects matching areaid
+ * @param {Object} d1 - dataset of parkingspaces
+ * @param {Object} d1 - dataset of parkingspaces
  */
 export function matchAreaId(d1, d2) {
   return d1.map(element => d2.find(key => element.areaid == key.areaid)).filter(item => typeof item === 'object')
@@ -53,7 +53,7 @@ export function getLocationNames(data) {
 }
 
 /**
- * Function finds province for given place
+ * Function finds province for a given place
  * @param {String} city - city name 
  * @param {Object} d1 - dataset
  */
@@ -66,13 +66,12 @@ export function findProvince(city, d1) {
  * @param {String} element - string
  */
 function groupInBrackets(element) {
-  let a = element.includes('(') ? element.match(/(?<=\().+?(?=\))/)[0] : false
-  return a
+  return element.includes('(') ? element.match(/(?<=\().+?(?=\))/)[0] : false
 }
 
 /**
  * Function capitalizes first letter of given string
- * @param {Strin} word - string to capitalize
+ * @param {String} word - string to capitalize
  */
 function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase + word.slice(1)
