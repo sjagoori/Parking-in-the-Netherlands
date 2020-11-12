@@ -1,41 +1,56 @@
 import React from 'react'
-import axios from 'axios'
-import { filterData } from '../modules/util'
+import { generateBarchart, generatePiechart, generateMapchart } from '../modules/generates'
+import { createGlobalStyle } from 'styled-components'
+import styled from "styled-components"
+
+const GlobalStyle = createGlobalStyle`
+  body{
+      padding:0;
+      margin:0;
+      background-color: #FEEECC;
+  }
+`;
+
+const ChartContainer = styled.div`
+  margin-left: 50%;
+  transform: translateX(-50%);
+`
+const Chart = styled.div`
+  margin-top: 10px;
+  margin-bottom: 40px;
+  padding: 30px;
+  border: 1.8px solid black;
+  background-color: #FFF;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #FEEECC;
+
+  .radiocontainer input[type="radio"]:checked+label {
+    border-bottom: 2px solid red
+  }
+`
 
 export default class Index extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: {
-        state: false,
-        results: ['loading']
-      }
-    }
-  }
-
-  /**
-  * Funtion makes a GET request to given url 
-  * @param {String} url - API endpoint
-  */
-  getData() {
-    const callURL = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
-    axios.get(callURL).then(response => response).then(response => this.setState({ data: { state: true, results: response.data } }))
-  }
-
-  componentDidMount() {
-    this.getData()
+  async componentDidMount() {
+    console.warn('mounted')
+    generateMapchart()
+    generatePiechart()
+    generateBarchart()
   }
 
   render() {
-    const dataset = this.state.data.results
-    const kentekenData = filterData(dataset, 'kenteken')
-
-    const resultView = <div> {kentekenData} </div>
-    const loadView = <span>Loading</span>
+    const resultView = <ChartContainer>
+      <Chart id="mapchart"></Chart>
+      <Chart id="piechart"></Chart>
+      <Chart id="barchart"></Chart>
+    </ChartContainer>
 
     return (
       <>
-        { this.state.data.state ? resultView : loadView}
+        <GlobalStyle />
+        {resultView}
       </>)
   }
 }

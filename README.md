@@ -31,6 +31,7 @@ What are the disabled parking-space friendly cities in the Netherlands?
 [D3](https://github.com/d3/d3)  
 [React](https://github.com/facebook/react)  
 [NextJS](https://nextjs.org/)  
+[GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 ## 📝 License
 [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)

@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "next": "9.5.5",
+    "d3": "^6.2.0",
+    "next": "10.0.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "styled-components": "^5.2.1",
+    "topojson": "^3.0.2"
   }
 }
