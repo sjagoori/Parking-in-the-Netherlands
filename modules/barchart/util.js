@@ -31,6 +31,7 @@ export const generateHeadBlock = (id, title, data) => {
     .style('border', '1px solid black')
     .style('border-radius', '3px')
     .style('padding', '5px')
+    .style('cursor', 'pointer')
 
   const options = dropdownMenu.selectAll('option')
     .data([...new Set(data.map(key => key.province))])
