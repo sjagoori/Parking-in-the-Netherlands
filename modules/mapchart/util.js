@@ -43,40 +43,25 @@ export const handleMouseOut = (e, i) => {
  */
 export const handleFilter = (d, allSpaces, disabledSpaces) => {
   const pick = d.target.defaultValue
-  const map = select("#mapchart").select('svg')
+  const map = select("#mapchart")
 
-  switch (pick) {
-    case 'regular':
-      map.selectAll('circle').remove()
-      map.selectAll('circle')
-        .data(allSpaces)
-        .enter()
-        .append('circle')
-        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-        .attr('r', '4px')
-        .attr('stroke', 'black')
-        .style('stroke-width', '.5px')
-        .attr('fill', '#FF333D')
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
-      break;
-    case 'disabled':
-      map.selectAll('circle').remove()
-      map.selectAll('circle')
-        .data(disabledSpaces)
-        .enter()
-        .append('circle')
-        .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-        .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-        .attr('r', '4px')
-        .attr('stroke', 'black')
-        .style('stroke-width', '.5px')
-        .attr('fill', '#FF333D')
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
-      break;
-  }
+  map.select('svg').selectAll('circle')
+  .data(pick == 'disabled' ? disabledSpaces : allSpaces)
+  .enter()
+  .append('circle')
+  .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+  .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+  .attr('r', '4px')
+  .attr('stroke', 'black')
+  .style('stroke-width', '.5px')
+  .attr('fill', '#FF333D')
+  .on('mouseover', handleMouseOver)
+  .on('mouseout', handleMouseOut)
+  
+  map.selectAll('circle')
+  .data(pick == 'disabled' ? disabledSpaces : allSpaces)
+  .exit()
+  .remove()
 }
 
 /**

@@ -26,7 +26,6 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('class', 'map')
     .style('background-color', 'transparent ')
 
-  const g = map.append('g')
   map.selectAll('circle')
     .data(allSpaces)
     .enter()
@@ -40,6 +39,7 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
+  const g = map.append('g')
   g.append('g')
     .attr('fill', 'transparent')
     .attr('stroke', 'black')
