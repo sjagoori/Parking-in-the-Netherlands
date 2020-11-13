@@ -42,6 +42,7 @@ export default class Index extends React.Component {
 
   render() {
     const resultView = <ChartContainer>
+      <h1>How diverse are the parking spaces in The Netherlands?</h1>
       <Chart id="mapchart"></Chart>
       <Chart id="piechart"></Chart>
       <Chart id="barchart"></Chart>
