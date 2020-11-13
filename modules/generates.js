@@ -24,7 +24,7 @@ export async function generateBarchart() {
     })
   })
   
-  barchart(dataset, 'barchart', 'Parkingspace dispresion per city per province')
+  barchart(dataset, 'barchart', 'Amount of parkingspaces per city')
 }
 
 /**
@@ -45,34 +45,7 @@ export async function generatePiechart() {
     }
   ]
 
-  let sampleData = [
-    {
-      amount: disabledAreas.length,
-      label: 'Disabled'
-    },
-    {
-      amount: 300,
-      label: 'AAA'
-    },
-    {
-      amount: 100,
-      label: 'ZZZ'
-    },
-    {
-      amount: 700,
-      label: 'BBB'
-    },
-    {
-      amount: 100,
-      label: 'CCC'
-    },
-    {
-      amount: 500,
-      label: 'Regular'
-    }
-  ]
-
-  piechart(data, 'piechart', 'The amount of parking places that are disabled friendly')
+  piechart(data, 'piechart', 'Diversity of parkingspaces')
 }
 
 export async function generateMapchart() {
@@ -80,5 +53,5 @@ export async function generateMapchart() {
   let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
   let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
   let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
-  mapchart(geoParkinSpaces, disabledSpaces, mapData,'mapchart', 'Difference in parking spaces per driver type')
+  mapchart(geoParkinSpaces, disabledSpaces, mapData,'mapchart', 'Dispersion of parkingspaces per category')
 }
