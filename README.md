@@ -1,10 +1,11 @@
 # 👋 Welcome to Functional-programming!
 _The repo is used for the course functional programming; throughout this course, the wiki is actively updated with new (daily or weekly) content._
 
+## Live demo
+[Link](http://functional-programming.vercel.app/)
+
 ## 📓 In short (description)
 This course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), a dutch newsagency that distributes their paper digitally as physically. We're making a visualization using one of their datasets; this visualization might get included in their publications. This repo will contian code and documentation for this project as well as sample code and its documentation in the wiki. Furthermore, the project will transform raw data into clean data, and then visualize it using [D3](https://github.com/d3/d3). 
-
-**Live demo:** [Link](http://functional-programming.vercel.app/)
 
 ## 🔎 Research 
 [See the wiki for a complete version](https://github.com/sjagoori/functional-programming/wiki/%F0%9F%94%8E-Research)
@@ -37,6 +38,7 @@ Make a map with locations of each parkinspace that also displays the parkingspac
 [D3](https://github.com/d3/d3)  
 [React](https://github.com/facebook/react)  
 [NextJS](https://nextjs.org/)  
+[Tech Track lectures](https://github.com/cmda-t)
 
 ## 📝 License
 [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
