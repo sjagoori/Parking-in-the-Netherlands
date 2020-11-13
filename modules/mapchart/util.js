@@ -31,7 +31,7 @@ export const handleMouseOver = (e, i) => {
  * @param {Event} e - unused to fetch default parm
  * @param {Object} i - data
  */
-export const handleMouseOut = (e, i) => {
+export const handleMouseOut = () => {
   selectAll('#tooltip').remove()
 }
 
@@ -42,26 +42,22 @@ export const handleMouseOut = (e, i) => {
  * @param {Object} disabledSpaces - dataset
  */
 export const handleFilter = (d, allSpaces, disabledSpaces) => {
-  const pick = d.target.defaultValue
+  const pick = d.target.defaultValue == 'disabled' ? disabledSpaces : allSpaces
   const map = select("#mapchart")
 
+  map.selectAll('circle').remove()
   map.select('svg').selectAll('circle')
-  .data(pick == 'disabled' ? disabledSpaces : allSpaces)
-  .enter()
-  .append('circle')
-  .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
-  .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
-  .attr('r', '4px')
-  .attr('stroke', 'black')
-  .style('stroke-width', '.5px')
-  .attr('fill', '#FF333D')
-  .on('mouseover', handleMouseOver)
-  .on('mouseout', handleMouseOut)
-  
-  map.selectAll('circle')
-  .data(pick == 'disabled' ? disabledSpaces : allSpaces)
-  .exit()
-  .remove()
+    .data(pick)
+    .enter()
+    .append('circle')
+    .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
+    .attr('cy', d => projection([d.location.longitude, d.location.latitude])[1])
+    .attr('r', '4px')
+    .attr('stroke', 'black')
+    .style('stroke-width', '.5px')
+    .attr('fill', '#FF333D')
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut)
 }
 
 /**
@@ -92,7 +88,6 @@ export const generateHeadBlock = (id, title) => {
 
   const group2 = container.append('div')
 
-
   const dRadio = group1.append('input')
     .attr('name', 'radiogroup')
     .attr('type', 'radio')
@@ -114,15 +109,9 @@ export const generateHeadBlock = (id, title) => {
     .attr('checked', 'checked')
     .style('display', 'none')
 
-
   const rLabel = group2.append('label')
   rLabel.attr('for', 'regular')
     .text('Regular')
     .style('display', 'block')
     .style('cursor', 'pointer')
-
-
-
-
-
 }
