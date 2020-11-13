@@ -9,7 +9,6 @@ _The repo is used for the course functional programming; throughout this course,
         <td align="center"><a href="#-installation">🤖 Installation<a></td>
         <td align="center"><a href="#-screenshots">📷 Screenshots<a></td>
         <td align="center"><a href="#-sources">🤝 Sources<a></td>
-        <td align="center"><a href="#-license">📝 License<a></td>
     </tr>
 </table>
 
