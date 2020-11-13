@@ -26,6 +26,16 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('class', 'map')
     .style('background-color', 'transparent ')
 
+  const g = map.append('g')
+  g.append('g')
+    .attr('fill', 'transparent')
+    .attr('stroke', 'black')
+    .style('stroke-width', '.5px')
+    .selectAll('path')
+    .data(feature(mapData, mapData.objects.gemeente_2020).features)
+    .join('path')
+    .attr('d', path);
+
   map.selectAll('circle')
     .data(allSpaces)
     .enter()
@@ -38,16 +48,6 @@ export function mapchart(allSpaces, disabledSpaces, mapData, id, title) {
     .attr('fill', '#FF333D')
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
-
-  const g = map.append('g')
-  g.append('g')
-    .attr('fill', 'transparent')
-    .attr('stroke', 'black')
-    .style('stroke-width', '.5px')
-    .selectAll('path')
-    .data(feature(mapData, mapData.objects.gemeente_2020).features)
-    .join('path')
-    .attr('d', path);
 
   selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, allSpaces, disabledSpaces))
 }
