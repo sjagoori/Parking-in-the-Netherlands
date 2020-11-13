@@ -45,7 +45,7 @@ export async function generatePiechart() {
     }
   ]
 
-  piechart(data, 'piechart', 'Diversity of parkingspaces')
+  piechart(data, 'piechart', 'Amount of parkingspaces')
 }
 
 export async function generateMapchart() {
