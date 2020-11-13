@@ -1,10 +1,22 @@
 # 👋 Welcome to Functional-programming!
 _The repo is used for the course functional programming; throughout this course, the wiki is actively updated with new (daily or weekly) content._
 
-## Live demo
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <td align="center"><a href="#live-demo">💻Live demo<a></td>
+        <td align="center"><a href="#-the-assignment">📓 The assignment<a></td>
+        <td align="center"><a href="#-research">🔎 Research <a></td>
+        <td align="center"><a href="#-installation">🤖 Installation<a></td>
+        <td align="center"><a href="#-screenshots">📷 Screenshots<a></td>
+        <td align="center"><a href="#-sources">🤝 Sources<a></td>
+        <td align="center"><a href="#-license">📝 License<a></td>
+    </tr>
+</table>
+
+## 💻Live demo
 [Link](http://functional-programming.vercel.app/)
 
-## 📓 In short (description)
+## 📓 The assignment
 This course is in partnership with [de Volkskrant](https://www.volkskrant.nl/), a dutch newsagency that distributes their paper digitally as physically. We're making a visualization using one of their datasets; this visualization might get included in their publications. This repo will contian code and documentation for this project as well as sample code and its documentation in the wiki. Furthermore, the project will transform raw data into clean data, and then visualize it using [D3](https://github.com/d3/d3). 
 
 ## 🔎 Research 
