@@ -24,10 +24,21 @@ export default class Ayo extends React.Component {
     }, 1000);
   
     let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
-    let geoParkinSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
-    let disabledSpaces = matchAreaId(parkingSpaces, geoParkinSpaces)
+    let geoParkingSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
+    let disabledSpaces = matchAreaId(parkingSpaces, geoParkingSpaces)
     let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
-    let state = composer(geoParkinSpaces, disabledSpaces, mapData, 'mapchart', 'Dispersion of parkingspaces per category', ['disabled', 'regular'])
+
+    let state = composer({
+      primarySet: geoParkingSpaces,
+      secondarySet: disabledSpaces,
+      mapData: mapData,
+      chartId: this.props.id,
+      title: 'Dispersion of parkingspaces per category'
+    })
+
+
+
+
     this.setState({ state: state })
   }
 

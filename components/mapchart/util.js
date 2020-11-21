@@ -66,14 +66,14 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
  * @param {String} title - chart title
  * @param {Object} options - options for dropdown
  */
-export const generateHeadBlock = (id, title, options) => {
-  const head = select("#" + id).append('div')
+export const generateHeadBlock = (data) => {
+  const head = select("#" + data.id).append('div')
     .style('display', 'flex')
     .style('justify-content', 'space-around')
     .style('align-items', 'flex-end')
     .style('margin-bottom', '20px')
   head.append('text')
-    .text(title)
+    .text(data.title)
     .style('font-size', '1.8em')
     .style('font-weight', 'bold')
     .style('display', 'block')
@@ -85,18 +85,21 @@ export const generateHeadBlock = (id, title, options) => {
     .style('justify-content', 'space-around')
     .attr('class', 'radiocontainer')
 
-  options.map(key =>{ 
-    const group = container.append('div')
-    group.append('input')
+  data.filterOptions ? generateOptions(data.filterOptions, container) : false
+
+}
+
+const generateOptions = (options, container) => options.map(key => {
+  const group = container.append('div')
+  group.append('input')
     .attr('name', 'radiogroup')
     .attr('type', 'radio')
     .attr('value', key)
     .attr('id', key)
     .style('display', 'none')
-    group.append('label')
+  group.append('label')
     .attr('for', key)
     .text(key)
     .style('display', 'block')
     .style('cursor', 'pointer')
-    })
-}
+})

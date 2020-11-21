@@ -12,14 +12,21 @@ export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
  * @param {String} title - chart title
  * @param {Object} options - options for filtering
  */
-export function composer(allSpaces, disabledSpaces, mapData, id, title, options) {
+export function composer(data) {
   const path = geoPath().projection(projection)
   const width = 500
   const height = 500
 
-  generateHeadBlock(id, title, options)
 
-  const map = select("#" + id)
+  console.log(typeof data.filterOptions)
+
+  generateHeadBlock({
+    id: data.chartId,
+    title: data.title,
+    filterOptions: data.filterOptions ? data.filterOptions : false
+  })
+
+  const map = select("#" + data.chartId)
     .append("svg")
     .attr('viewBox', [250, 0, width, height])
     .attr('class', 'map')
@@ -31,12 +38,12 @@ export function composer(allSpaces, disabledSpaces, mapData, id, title, options)
     .attr('stroke', 'black')
     .style('stroke-width', '.5px')
     .selectAll('path')
-    .data(feature(mapData, mapData.objects.gemeente_2020).features)
+    .data(feature(data.mapData, data.mapData.objects.gemeente_2020).features)
     .join('path')
     .attr('d', path);
 
   map.selectAll('circle')
-    .data(allSpaces)
+    .data(data.primarySet)
     .enter()
     .append('circle')
     .attr('cx', d => projection([d.location.longitude, d.location.latitude])[0])
@@ -48,6 +55,6 @@ export function composer(allSpaces, disabledSpaces, mapData, id, title, options)
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
-  selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, allSpaces, disabledSpaces))
+  selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, data.primarySet, data.secondarySet))
   return true
 }
