@@ -26,7 +26,8 @@ import Map from '../components/mapchart/Map'
 ```
 
 ## Dependencies
-* D3 ^6.2.0
+* [D3](https://github.com/d3/d3) - ^6.2.0
+* [topojson](https://github.com/topojson/topojson) - ^3.0.2
 
 ## Developer
 [Shabier](https://www.github.com/sjagoori)
