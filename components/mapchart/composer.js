@@ -17,9 +17,6 @@ export function composer(data) {
   const width = 500
   const height = 500
 
-
-  console.log(typeof data.filterOptions)
-
   generateHeadBlock({
     id: data.chartId,
     title: data.title,

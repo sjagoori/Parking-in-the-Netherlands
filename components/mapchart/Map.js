@@ -18,15 +18,11 @@ export default class Ayo extends React.Component {
     this.state = { state: false }
   }
 
-  async componentDidMount() {
-    setTimeout(() => {
-
-    }, 1000);
-  
-    let parkingSpaces = filterAreaIdDisabled(await getData('https://opendata.rdw.nl/resource/b3us-f26s.json'))
-    let geoParkingSpaces = await getData('https://opendata.rdw.nl/resource/t5pc-eb34.json')
+  async componentDidMount() {  
+    let parkingSpaces = filterAreaIdDisabled(await getData(this.props.primarySet))
+    let geoParkingSpaces = await getData(this.props.secondarySet)
     let disabledSpaces = matchAreaId(parkingSpaces, geoParkingSpaces)
-    let mapData = await getData('https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson')
+    let mapData = await getData(this.props.mapData)
 
     let state = composer({
       primarySet: geoParkingSpaces,
@@ -34,7 +30,7 @@ export default class Ayo extends React.Component {
       mapData: mapData,
       chartId: this.props.id,
       title: 'Dispersion of parkingspaces per category',
-      filterOptions: ['disabled', 'regular']
+      filterOptions: this.props.filterOptions
     })
 
     this.setState({ state: state })

@@ -22,7 +22,13 @@ export default class Index extends React.Component {
       <>
         <GlobalStyle />
         <ChartContainer>
-          <Map id="mapchart" />
+          <Map 
+          id="mapchart" 
+          primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
+          secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
+          mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
+          filterOptions={['disabled', 'regular']}
+          />
         </ChartContainer>
       </>
     )
