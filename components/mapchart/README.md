@@ -7,8 +7,11 @@
   - [Developer](#developer)
   - [Changelog](#changelog)
 
+<div style="text-align:center"><img src="screenshot.png" alt="alt text" width="600"/></div>
+
 ## What it does 
 * Generate a map chart
+* Place dots on specified locations
 
 ## How to use
 Import and implement component
