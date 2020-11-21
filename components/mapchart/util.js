@@ -61,10 +61,14 @@ export const handleFilter = (d, allSpaces, disabledSpaces) => {
 }
 
 /**
- * Function generated headblock 
- * @param {String} id - chart id
- * @param {String} title - chart title
- * @param {Object} options - options for dropdown
+ * Function generates headblock 
+ * @param {Object} data - headBlock attributes
+ * 
+ * data {
+ *    id:            'string',
+ *    title:         'string',
+ *    filterOptions: 'object'
+ * }
  */
 export const generateHeadBlock = (data) => {
   const head = select("#" + data.id).append('div')
@@ -86,7 +90,6 @@ export const generateHeadBlock = (data) => {
     .attr('class', 'radiocontainer')
 
   data.filterOptions ? generateOptions(data.filterOptions, container) : false
-
 }
 
 const generateOptions = (options, container) => options.map(key => {
