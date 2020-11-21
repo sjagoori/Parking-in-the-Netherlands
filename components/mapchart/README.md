@@ -19,10 +19,10 @@ import Map from '../components/mapchart/Map'
 ```
 
 ## Dependencies
-* D3
+* D3 ^6.2.0
 
 ## Developer
-[Shabier](www.github.com/sjagoori)
+[Shabier](https://www.github.com/sjagoori)
 
 ## Changelog
 ### 1.0
