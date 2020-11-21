@@ -92,13 +92,14 @@ export const generateHeadBlock = (data) => {
   data.filterOptions ? generateOptions(data.filterOptions, container) : false
 }
 
-const generateOptions = (options, container) => options.map(key => {
+const generateOptions = (options, container) => options.map((key, index) => {
   const group = container.append('div')
   group.append('input')
     .attr('name', 'radiogroup')
     .attr('type', 'radio')
     .attr('value', key)
     .attr('id', key)
+    .attr('checked', index == 0 ? 'checked' : '')
     .style('display', 'none')
   group.append('label')
     .attr('for', key)
@@ -106,3 +107,4 @@ const generateOptions = (options, container) => options.map(key => {
     .style('display', 'block')
     .style('cursor', 'pointer')
 })
+
