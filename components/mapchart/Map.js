@@ -29,7 +29,7 @@ export default class Ayo extends React.Component {
       secondarySet: disabledSpaces,
       mapData: mapData,
       chartId: this.props.id,
-      title: 'Dispersion of parkingspaces per category',
+      title: this.props.title,
       filterOptions: this.props.filterOptions
     })
 
