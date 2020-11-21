@@ -12,6 +12,28 @@ const Loader = styled.div`
   transform: translate(-50%, -50%);
   `
 
+const ChartContainer = styled.div`
+  margin-left: 50%;
+  transform: translateX(-50%);
+`
+
+const Chart = styled.div`
+  margin-top: 10px;
+  margin-bottom: 40px;
+  max-width: 800px;
+  padding: 30px;
+  border: 1.8px solid black;
+  background-color: #FFF;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: transparent;
+  .radiocontainer input[type="radio"]:checked+label {
+    border-bottom: 2px solid red
+  }
+`
+
 export default class Ayo extends React.Component {
   constructor(props) {
     super(props)
@@ -46,9 +68,12 @@ export default class Ayo extends React.Component {
     const loadState = <Loader><CircularProgress /></Loader>
 
     if (!state) {
-      return <div id={this.props.id}>{loadState}</div>
+      return <ChartContainer><Chart id={this.props.id}>{loadState}</Chart></ChartContainer>
+
+
+
     } else {
-      return <div id={this.props.id}></div>
+      return  <ChartContainer><Chart id={this.props.id}></Chart></ChartContainer>
     }
   }
 }
