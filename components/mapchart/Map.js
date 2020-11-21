@@ -18,11 +18,11 @@ export default class Ayo extends React.Component {
     this.state = { state: false }
   }
 
-  async componentDidMount() {  
-    let parkingSpaces = filterAreaIdDisabled(await getData(this.props.primarySet))
-    let geoParkingSpaces = await getData(this.props.secondarySet)
-    let disabledSpaces = matchAreaId(parkingSpaces, geoParkingSpaces)
-    let mapData = await getData(this.props.mapData)
+  async componentDidMount() {
+    let parkingSpaces = this.props.primarySet ? filterAreaIdDisabled(await getData(this.props.primarySet)) : false
+    let geoParkingSpaces = this.props.secondarySet ? await getData(this.props.secondarySet) : false
+    let disabledSpaces = parkingSpaces && geoParkingSpaces ? matchAreaId(parkingSpaces, geoParkingSpaces) : false
+    let mapData = this.props.mapData ? await getData(this.props.mapData) : false
 
     let state = composer({
       primarySet: geoParkingSpaces,
