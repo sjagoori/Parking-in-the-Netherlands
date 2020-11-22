@@ -98,6 +98,12 @@ export const generateHeadBlock = (data) => {
   data.filterOptions ? generateOptions(data.filterOptions, container) : false
 }
 
+/**
+ * Function generates for generateHeadblock function
+ * @see {@link generateHeadBlock}
+ * @param {Object} options - object of options
+ * @param {Object} container - d3 container for the options to append at
+ */
 const generateOptions = (options, container) => options.map((key, index) => {
   const group = container.append('div')
   group.append('input')
