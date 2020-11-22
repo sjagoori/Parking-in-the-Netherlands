@@ -69,9 +69,6 @@ export default class Ayo extends React.Component {
 
     if (!state) {
       return <ChartContainer><Chart id={this.props.id}>{loadState}</Chart></ChartContainer>
-
-
-
     } else {
       return <ChartContainer><Chart id={this.props.id}></Chart></ChartContainer>
     }

@@ -59,6 +59,7 @@ export function composer(data) {
 
   selectAll('input[name="radiogroup"').on('change', d => {
     handleFilter({
+      id: data.chartId,
       event: d,
       primarySet: data.primarySet,
       secondarySet: data.secondarySet,

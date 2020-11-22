@@ -40,6 +40,7 @@ export const handleMouseOut = () => {
  * @param {Object} data - filter attributes
  * 
  * data {
+ *    id:               'string',
  *    event:            'event object',
  *    primarySet:       'object',
  *    secondarySet:     'object',
@@ -48,7 +49,7 @@ export const handleMouseOut = () => {
  */
 export const handleFilter = (data) => {
   const pick = data.event.target.defaultValue == data.secondaryOption ? data.secondarySet : data.primarySet
-  const map = select("#mapchart")
+  const map = select("#" + data.id)
 
   map.selectAll('circle').remove()
   map.select('svg').selectAll('circle')
