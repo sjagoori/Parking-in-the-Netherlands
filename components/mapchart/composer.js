@@ -1,7 +1,6 @@
 import { select, geoMercator, geoPath, selectAll } from 'd3';
 import { feature } from 'topojson';
 import { generateHeadBlock, handleFilter, handleMouseOver, handleMouseOut } from './util';
-export const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
 
 /**
