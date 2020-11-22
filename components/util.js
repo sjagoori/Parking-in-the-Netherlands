@@ -73,6 +73,6 @@ function groupInBrackets(element) {
  * Function capitalizes first letter of given string
  * @param {String} word - string to capitalize
  */
-function capitalizeFirstLetter(word) {
-  return word.charAt(0).toUpperCase + word.slice(1)
+export function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1)
 }

@@ -16,7 +16,6 @@ export default class Index extends React.Component {
       <>
         <GlobalStyle />
 
-
         <Map
           id='mapchart'
           title='Dispersion of parkingspaces per category'

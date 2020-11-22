@@ -1,6 +1,6 @@
 import React from 'react'
 import { composer } from './composer'
-import { getData, filterAreaIdDisabled, matchAreaId } from '../util'
+import { getData, filterAreaIdDisabled, matchAreaId, capitalizeFirstLetter } from '../util'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styled from "styled-components"
 
@@ -52,7 +52,7 @@ export default class Ayo extends React.Component {
       mapData: mapData,
       chartId: this.props.id,
       title: this.props.title,
-      filterOptions: this.props.filterOptions
+      filterOptions: this.props.filterOptions.map(key => capitalizeFirstLetter(key))
     })
 
     this.setState({ state: state })
@@ -73,7 +73,7 @@ export default class Ayo extends React.Component {
 
 
     } else {
-      return  <ChartContainer><Chart id={this.props.id}></Chart></ChartContainer>
+      return <ChartContainer><Chart id={this.props.id}></Chart></ChartContainer>
     }
   }
 }
