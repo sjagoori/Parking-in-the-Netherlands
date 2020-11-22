@@ -52,7 +52,7 @@ export default class Ayo extends React.Component {
       mapData: mapData,
       chartId: this.props.id,
       title: this.props.title,
-      filterOptions: this.props.filterOptions.map(key => capitalizeFirstLetter(key))
+      filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false
     })
 
     this.setState({ state: state })
