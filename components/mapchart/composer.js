@@ -5,12 +5,18 @@ export const colors = ['#FAA51A', '#F15E6B', 'pink', 'red', 'purple']
 export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
 
 /**
- * Map chart
+ * Function composes map chart with datapoint elemnts
  * @see {@link https://vizhub.com/sreen020/f29bf760c4ef40efaa0343794f63e1d0?edit=files&file=index.js} - used reference
- * @param {Object} data - dataset
- * @param {String} id - element id for chart
- * @param {String} title - chart title
- * @param {Object} options - options for filtering
+ * @param {Object} data - composer attributes
+ * 
+ * data {
+ *    primarySet:       'object',
+ *    secondarySet:     'object',
+ *    mapData:          'object',
+ *    chartId:          'string',
+ *    title:            'string',
+ *    filterOptions:    'object'
+ * }
  */
 export function composer(data) {
   const path = geoPath().projection(projection)
@@ -52,6 +58,14 @@ export function composer(data) {
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
-  selectAll('input[name="radiogroup"').on('change', d => handleFilter(d, data.primarySet, data.secondarySet))
+  selectAll('input[name="radiogroup"').on('change', d => {
+    handleFilter({
+      event: d,
+      primarySet: data.primarySet,
+      secondarySet: data.secondarySet,
+      secondaryOption: data.filterOptions[0]
+    })
+  })
   return true
 }
+

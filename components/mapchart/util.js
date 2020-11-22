@@ -37,12 +37,17 @@ export const handleMouseOut = () => {
 
 /**
  * Function handles filter for map chart
- * @param {Event} d - radiobutton event
- * @param {Object} allSpaces - dataset
- * @param {Object} disabledSpaces - dataset
+ * @param {Object} data - filter attributes
+ * 
+ * data {
+ *    event:            'event object',
+ *    primarySet:       'object',
+ *    secondarySet:     'object',
+ *    secondaryOption:  'string'
+ * }
  */
-export const handleFilter = (d, allSpaces, disabledSpaces) => {
-  const pick = d.target.defaultValue == 'disabled' ? disabledSpaces : allSpaces
+export const handleFilter = (data) => {
+  const pick = data.event.target.defaultValue == data.secondaryOption ? data.secondarySet : data.primarySet
   const map = select("#mapchart")
 
   map.selectAll('circle').remove()
