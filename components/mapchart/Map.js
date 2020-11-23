@@ -23,8 +23,21 @@ const Chart = styled.div`
   flex-direction: column;
   justify-content: center;
   background-color: transparent;
+  .radiocontainer label {
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #9a0007;
+    &:hover{
+      transition: .3s;
+      background-color: #9a0007;
+    }
+  }
   .radiocontainer input[type="radio"]:checked+label {
-    border-bottom: 2px solid red
+    transition: .3s;
+    background-color: #9a0007;
   }
   & path {
     fill: #1a1e28;
@@ -53,10 +66,10 @@ export default class Ayo extends React.Component {
       secondarySet: disabledSpaces,
       mapData: mapData,
       filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false,
-      credits: this.props.primarySet && this.props.secondarySet ? [this.props.primarySet, this.props.secondarySet] : this.props.secondarySet ? [this.props.secondarySet] : false 
+      credits: this.props.primarySet && this.props.secondarySet ? [this.props.primarySet, this.props.secondarySet] : this.props.secondarySet ? [this.props.secondarySet] : false
     })
 
-    
+
     this.setState({ state: state })
   }
 
