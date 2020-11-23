@@ -32,6 +32,13 @@ const MapContainer = styled.div`
   flex-shrink: 0;
 `
 
+const Devider = styled.hr`
+  border: none;
+  height: 2px;
+  width: 30%;
+  background-color: #F46036;
+`
+
 export default class Index extends React.Component {
   render() {
     return (
@@ -42,28 +49,32 @@ export default class Index extends React.Component {
             <Map
               id='disabledMap'
               title='Disabled'
-              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse' 
+              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'
               primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
               secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
             />
           </MapContainer>
 
+          <Devider />
+
           <MapContainer>
             <Map
               id='allMap'
               title='All'
-              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse' 
+              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'
               secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
             />
           </MapContainer>
 
+          <Devider />
+
           <MapContainer>
             <Map
               id='completeMap'
               title='Complete'
-              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse' 
+              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'
               primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
               secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
