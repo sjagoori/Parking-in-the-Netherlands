@@ -21,6 +21,7 @@ import Map from '../components/mapchart/Map'
 <Map
   id='id'
   title='Title'
+  lead='description'
   primarySet='https://example.com/dataset.json'
   secondarySet='https://example.com/dataset.json' //optional
   mapData='https://example.com/map.json'
@@ -36,6 +37,10 @@ import Map from '../components/mapchart/Map'
 [Shabier](https://www.github.com/sjagoori)
 
 ## Changelog
+### 1.2
+* Added lead element to chart, for short introductions
+* Added credit element to dataset source
+
 ### 1.1
 * Added all attributes to the component caller
 * Component now works without optional attributes

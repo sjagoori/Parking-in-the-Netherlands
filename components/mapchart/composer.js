@@ -9,12 +9,14 @@ export const projection = geoMercator().scale(6000).center([5.116667, 52.17])
  * @param {Object} data - composer attributes
  * 
  * data {
+ *    chartId:          'string',
+ *    title:            'string',
+ *    lead:             'string',
  *    primarySet:       'object',
  *    secondarySet:     'object',
  *    mapData:          'object',
- *    chartId:          'string',
- *    title:            'string',
- *    filterOptions:    'object'
+ *    filterOptions:    'object',
+ *    credit:           'string'
  * }
  */
 export function composer(data) {
@@ -25,10 +27,13 @@ export function composer(data) {
   generateHeadBlock({
     id: data.chartId,
     title: data.title,
+    lead: data.lead,
     filterOptions: data.filterOptions ? data.filterOptions : false
   })
 
-  const map = select("#" + data.chartId)
+  const svg = select("#" + data.chartId)
+
+  const map = svg
     .append("svg")
     .attr('viewBox', [250, 0, width, height])
     .attr('class', 'map')
@@ -57,7 +62,16 @@ export function composer(data) {
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
-    console.log(data.primarySet)
+  data.credits.map(key => {
+    svg.append('a')
+      .text(key)
+      .attr('href', key)
+      .style('text-align', 'right')
+      .style('color', 'grey')
+      .style('font-size', '.8rem')
+      .style('font-style', 'italic')
+  })
+
   selectAll('input[name="radiogroup"').on('change', d => {
     handleFilter({
       id: data.chartId,

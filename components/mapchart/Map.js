@@ -13,17 +13,11 @@ const Loader = styled.div`
   `
 
 const ChartContainer = styled.div`
-  margin-left: 50%;
-  transform: translateX(-50%);
+  width: 800px;
 `
 
 const Chart = styled.div`
-  margin-top: 10px;
-  margin-bottom: 40px;
-  max-width: 800px;
   padding: 30px;
-  border: 1.8px solid black;
-  background-color: #FFF;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -31,6 +25,11 @@ const Chart = styled.div`
   background-color: transparent;
   .radiocontainer input[type="radio"]:checked+label {
     border-bottom: 2px solid red
+  }
+  & path {
+    fill: #1a1e28;
+    stroke: #000;
+    stroke-width: .3px
   }
 `
 
@@ -47,14 +46,17 @@ export default class Ayo extends React.Component {
     let mapData = this.props.mapData ? await getData(this.props.mapData) : false
 
     let state = composer({
+      chartId: this.props.id,
+      title: this.props.title,
+      lead: this.props.lead,
       primarySet: this.props.id == 'disabledMap' ? disabledSpaces : geoParkingSpaces,
       secondarySet: disabledSpaces,
       mapData: mapData,
-      chartId: this.props.id,
-      title: this.props.title,
-      filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false
+      filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false,
+      credits: this.props.primarySet && this.props.secondarySet ? [this.props.primarySet, this.props.secondarySet] : this.props.secondarySet ? [this.props.secondarySet] : false 
     })
 
+    
     this.setState({ state: state })
   }
 

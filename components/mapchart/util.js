@@ -18,6 +18,7 @@ export const handleMouseOver = (e, i) => {
     .text(i.areadesc)
     .style('opacity', 1)
     .style('background-color', 'white')
+    .style('color', 'black')
     .style('position', 'absolute')
     .style('padding', '5px')
     .style('border', '1px solid black')
@@ -73,6 +74,7 @@ export const handleFilter = (data) => {
  * data {
  *    id:            'string',
  *    title:         'string',
+ *    lead:          'string',
  *    filterOptions: 'object'
  * }
  */
@@ -80,14 +82,16 @@ export const generateHeadBlock = (data) => {
   const head = select("#" + data.id).append('div')
     .style('display', 'flex')
     .style('justify-content', 'space-around')
-    .style('align-items', 'flex-end')
-    .style('margin-bottom', '20px')
+    .style('flex-direction', 'column')
   head.append('text')
     .text(data.title)
     .style('font-size', '1.8em')
     .style('font-weight', 'bold')
     .style('display', 'block')
     .attr('class', 'title')
+  head.append('p')
+    .text(data.lead)
+    .style('width', '90%')
 
   const container = head.append('div')
     .style('display', 'flex')
