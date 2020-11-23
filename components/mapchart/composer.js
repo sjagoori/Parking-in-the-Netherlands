@@ -57,6 +57,7 @@ export function composer(data) {
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
+    console.log(data.primarySet)
   selectAll('input[name="radiogroup"').on('change', d => {
     handleFilter({
       id: data.chartId,

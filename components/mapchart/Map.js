@@ -47,7 +47,7 @@ export default class Ayo extends React.Component {
     let mapData = this.props.mapData ? await getData(this.props.mapData) : false
 
     let state = composer({
-      primarySet: geoParkingSpaces,
+      primarySet: this.props.id == 'disabledMap' ? disabledSpaces : geoParkingSpaces,
       secondarySet: disabledSpaces,
       mapData: mapData,
       chartId: this.props.id,
