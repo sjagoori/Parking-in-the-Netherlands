@@ -24,7 +24,6 @@ const FullPage = styled.div`
 
 const MapContainer = styled.div`
   width: 100vw;
-  border: 1px red solid;
   height: 100vh;
   scroll-snap-align: start;
   display: flex;
