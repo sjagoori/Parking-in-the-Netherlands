@@ -17,13 +17,13 @@ export default class Index extends React.Component {
         <GlobalStyle />
 
         <Map
-          id='completeMap'
-          title='Complete'
+          id='disabledMap'
+          title='Disabled'
           primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
           secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
           mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
-          filterOptions={['disabled', 'regular']}
         />
+
         <Map
           id='allMap'
           title='All'
@@ -32,13 +32,13 @@ export default class Index extends React.Component {
         />
 
         <Map
-          id='disabledMap'
-          title='Disabled'
+          id='completeMap'
+          title='Complete'
           primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
           secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
           mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
+          filterOptions={['disabled', 'regular']}
         />
-
       </>
     )
   }
