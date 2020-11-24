@@ -79,27 +79,20 @@ export const handleFilter = (data) => {
  * }
  */
 export const generateHeadBlock = (data) => {
-  const head = select("#" + data.id).append('div')
+  const head = select('#' + data.id + 'lowerPart').append('div')
     .style('display', 'flex')
-    .style('justify-content', 'space-around')
     .style('flex-direction', 'column')
-  head.append('text')
-    .text(data.title)
-    .style('font-size', '1.8em')
-    .style('font-weight', 'bold')
-    .style('display', 'block')
-    .attr('class', 'title')
+    .style('width', '350px')
   head.append('p')
     .text(data.lead)
-    .style('width', '90%')
 
-  const container = head.append('div')
+  const radiocontainer = head.append('div')
     .style('display', 'flex')
     .style('width', '200px')
     .style('justify-content', 'space-around')
     .attr('class', 'radiocontainer')
 
-  data.filterOptions ? generateOptions(data.filterOptions, container) : false
+  data.filterOptions ? generateOptions(data.filterOptions, radiocontainer) : false
 }
 
 /**

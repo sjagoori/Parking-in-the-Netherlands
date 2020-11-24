@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 const FullPage = styled.div`
   width: 100vw;
   height: 100vh;
@@ -45,7 +44,7 @@ export default class Index extends React.Component {
       <>
         <FullPage>
           <GlobalStyle />
-          <MapContainer>
+          {/* <MapContainer id='mindThisElement'>
             <Map
               id='disabledMap'
               title='Disabled'
@@ -68,7 +67,7 @@ export default class Index extends React.Component {
             />
           </MapContainer>
 
-          <Devider />
+          <Devider /> */}
 
           <MapContainer>
             <Map

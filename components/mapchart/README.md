@@ -37,6 +37,9 @@ import Map from '../components/mapchart/Map'
 [Shabier](https://www.github.com/sjagoori)
 
 ## Changelog
+### 1.3
+* Reorded elements, title now shows above the lead and map
+
 ### 1.2
 * Added lead element to chart, for short introductions
 * Added credit element to dataset source

@@ -24,6 +24,17 @@ export function composer(data) {
   const width = 500
   const height = 500
 
+  select("#" + data.chartId).append('h1')
+  .text(data.title)
+  .style('margin-top', '0')
+  .style('max-width', (width * 1.5) + 'px')
+  .style('overflow-wrap', 'break-word')
+
+  const lowerPart = select("#" + data.chartId)
+  .append('div')
+  .attr('id', data.chartId + 'lowerPart')
+  .style('display', 'flex')
+
   generateHeadBlock({
     id: data.chartId,
     title: data.title,
@@ -31,13 +42,18 @@ export function composer(data) {
     filterOptions: data.filterOptions ? data.filterOptions : false
   })
 
-  const svg = select("#" + data.chartId)
+  console.log(data.chartId + 'lowerPart')
 
-  const map = svg
+  const container = lowerPart.append('div')
+  .style('display', 'flex')
+  .style('flex-direction', 'column')
+
+  const map = container
     .append("svg")
     .attr('viewBox', [250, 0, width, height])
     .attr('class', 'map')
     .style('background-color', 'transparent ')
+    .style('width', (width * 1.1))
 
   const g = map.append('g')
   g.append('g')
@@ -47,7 +63,7 @@ export function composer(data) {
     .selectAll('path')
     .data(feature(data.mapData, data.mapData.objects.gemeente_2020).features)
     .join('path')
-    .attr('d', path);
+    .attr('d', path)
 
   map.selectAll('circle')
     .data(data.primarySet)
@@ -62,14 +78,17 @@ export function composer(data) {
     .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut)
 
+
+  const creditContainer = container.append('div')
   data.credits.map(key => {
-    svg.append('a')
+    creditContainer.append('a')
       .text(key)
       .attr('href', key)
       .style('text-align', 'right')
       .style('color', 'grey')
       .style('font-size', '.8rem')
       .style('font-style', 'italic')
+      .style('display', 'block')
   })
 
   selectAll('input[name="radiogroup"').on('change', d => {

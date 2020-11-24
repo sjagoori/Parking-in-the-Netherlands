@@ -10,19 +10,15 @@ const Loader = styled.div`
   top: 50%; 
   transform: translateY(-50%); 
   transform: translate(-50%, -50%);
-  `
-
-const ChartContainer = styled.div`
-  width: 800px;
 `
 
 const Chart = styled.div`
-  padding: 30px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: transparent;
+
   .radiocontainer label {
     font-weight: 500;
     border-radius: 5px;
@@ -83,9 +79,9 @@ export default class Ayo extends React.Component {
     const loadState = <Loader><CircularProgress /></Loader>
 
     if (!state) {
-      return <ChartContainer><Chart id={this.props.id}>{loadState}</Chart></ChartContainer>
+      return <><Chart id={this.props.id}>{loadState}</Chart></>
     } else {
-      return <ChartContainer><Chart id={this.props.id}></Chart></ChartContainer>
+      return <><Chart id={this.props.id}></Chart></>
     }
   }
 }
