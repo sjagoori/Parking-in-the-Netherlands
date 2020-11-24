@@ -73,7 +73,6 @@ export const handleFilter = (data) => {
  * 
  * data {
  *    id:            'string',
- *    title:         'string',
  *    lead:          'string',
  *    filterOptions: 'object'
  * }
@@ -87,10 +86,15 @@ export const generateHeadBlock = (data) => {
     .text(data.lead)
 
   const radiocontainer = head.append('div')
+  .attr('class', 'radiocontainer')
     .style('display', 'flex')
-    .style('width', '200px')
-    .style('justify-content', 'space-around')
-    .attr('class', 'radiocontainer')
+    .style('flex-direction', 'column')
+    .style('width', '300px')
+    .style('justify-content', 'space-between')
+
+  radiocontainer.append('p')
+    .text('Select:')
+    .style('font-weight', '700')
 
   data.filterOptions ? generateOptions(data.filterOptions, radiocontainer) : false
 }
@@ -101,19 +105,25 @@ export const generateHeadBlock = (data) => {
  * @param {Object} options - object of options
  * @param {Object} container - d3 container for the options to append at
  */
-const generateOptions = (options, container) => options.map((key, index) => {
+const generateOptions = (options, container) => {
   const group = container.append('div')
-  group.append('input')
-    .attr('name', 'radiogroup')
-    .attr('type', 'radio')
-    .attr('value', key)
-    .attr('id', key)
-    .attr('checked', index == 0 ? 'checked' : '')
-    .style('display', 'none')
-  group.append('label')
-    .attr('for', key)
-    .text(key)
-    .style('display', 'block')
-    .style('cursor', 'pointer')
-})
+    .style('display', 'flex')
+    .style('width', '180px')
+    .style('justify-content', 'space-between')
+
+  options.map((key, index) => {
+    group.append('input')
+      .attr('name', 'radiogroup')
+      .attr('type', 'radio')
+      .attr('value', key)
+      .attr('id', key)
+      .attr('checked', index == 0 ? 'checked' : '')
+      .style('display', 'none')
+    group.append('label')
+      .attr('for', key)
+      .text(key)
+      .style('display', 'block')
+      .style('cursor', 'pointer')
+  })
+}
 
