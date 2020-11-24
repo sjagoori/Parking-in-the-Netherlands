@@ -44,7 +44,7 @@ export default class Index extends React.Component {
       <>
         <FullPage>
           <GlobalStyle />
-          {/* <MapContainer id='mindThisElement'>
+          <MapContainer id='mindThisElement'>
             <Map
               id='disabledMap'
               title='Disabled'
@@ -67,7 +67,7 @@ export default class Index extends React.Component {
             />
           </MapContainer>
 
-          <Devider /> */}
+          <Devider />
 
           <MapContainer>
             <Map
