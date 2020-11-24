@@ -92,10 +92,6 @@ export const generateHeadBlock = (data) => {
     .style('width', '300px')
     .style('justify-content', 'space-between')
 
-  radiocontainer.append('p')
-    .text('Select:')
-    .style('font-weight', '700')
-
   data.filterOptions ? generateOptions(data.filterOptions, radiocontainer) : false
 }
 
@@ -106,6 +102,10 @@ export const generateHeadBlock = (data) => {
  * @param {Object} container - d3 container for the options to append at
  */
 const generateOptions = (options, container) => {
+  container.append('p')
+  .text('Select:')
+  .style('font-weight', '700')
+
   const group = container.append('div')
     .style('display', 'flex')
     .style('width', '180px')
