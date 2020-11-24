@@ -4,6 +4,45 @@ import { getData, filterAreaIdDisabled, matchAreaId, capitalizeFirstLetter } fro
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styled from "styled-components"
 
+export default class Ayo extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { state: false }
+  }
+
+  async componentDidMount() {
+    let parkingSpaces = this.props.primarySet ? filterAreaIdDisabled(await getData(this.props.primarySet)) : false
+    let geoParkingSpaces = this.props.secondarySet ? await getData(this.props.secondarySet) : false
+    let disabledSpaces = parkingSpaces && geoParkingSpaces ? matchAreaId(parkingSpaces, geoParkingSpaces) : false
+    let mapData = this.props.mapData ? await getData(this.props.mapData) : false
+
+    let state = composer({
+      chartId: this.props.id,
+      title: this.props.title,
+      lead: this.props.lead,
+      primarySet: this.props.id == 'disabledMap' ? disabledSpaces : geoParkingSpaces,
+      secondarySet: disabledSpaces,
+      mapData: mapData,
+      filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false,
+      credits: this.props.primarySet && this.props.secondarySet ? [this.props.primarySet, this.props.secondarySet] : this.props.secondarySet ? [this.props.secondarySet] : false
+    })
+
+    this.setState({ state: state })
+  }
+
+  render() {
+    console.log(this.state.state)
+    const state = this.state.state
+    const loadState = <Loader><CircularProgress /></Loader>
+
+    if (!state) {
+      return <><Chart id={this.props.id}>{loadState}</Chart></>
+    } else {
+      return <><Chart id={this.props.id}></Chart></>
+    }
+  }
+}
+
 const Loader = styled.div`
   position: absolute;
   left: 50%;
@@ -41,47 +80,3 @@ const Chart = styled.div`
     stroke-width: .3px
   }
 `
-
-export default class Ayo extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { state: false }
-  }
-
-  async componentDidMount() {
-    let parkingSpaces = this.props.primarySet ? filterAreaIdDisabled(await getData(this.props.primarySet)) : false
-    let geoParkingSpaces = this.props.secondarySet ? await getData(this.props.secondarySet) : false
-    let disabledSpaces = parkingSpaces && geoParkingSpaces ? matchAreaId(parkingSpaces, geoParkingSpaces) : false
-    let mapData = this.props.mapData ? await getData(this.props.mapData) : false
-
-    let state = composer({
-      chartId: this.props.id,
-      title: this.props.title,
-      lead: this.props.lead,
-      primarySet: this.props.id == 'disabledMap' ? disabledSpaces : geoParkingSpaces,
-      secondarySet: disabledSpaces,
-      mapData: mapData,
-      filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false,
-      credits: this.props.primarySet && this.props.secondarySet ? [this.props.primarySet, this.props.secondarySet] : this.props.secondarySet ? [this.props.secondarySet] : false
-    })
-
-
-    this.setState({ state: state })
-  }
-
-  getinitialprops(props) {
-    return props
-  }
-
-  render() {
-    console.log(this.state.state)
-    const state = this.state.state
-    const loadState = <Loader><CircularProgress /></Loader>
-
-    if (!state) {
-      return <><Chart id={this.props.id}>{loadState}</Chart></>
-    } else {
-      return <><Chart id={this.props.id}></Chart></>
-    }
-  }
-}
