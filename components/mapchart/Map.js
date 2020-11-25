@@ -11,16 +11,16 @@ export default class Ayo extends React.Component {
   }
 
   async componentDidMount() {
-    let parkingSpaces = this.props.primarySet ? filterAreaIdDisabled(await getData(this.props.primarySet)) : false
-    let geoParkingSpaces = this.props.secondarySet ? await getData(this.props.secondarySet) : false
-    let disabledSpaces = parkingSpaces && geoParkingSpaces ? matchAreaId(parkingSpaces, geoParkingSpaces) : false
-    let mapData = this.props.mapData ? await getData(this.props.mapData) : false
+    let primarySet = this.props.primarySet ? localStorage.getItem(this.props.primarySet) != null? JSON.parse(localStorage.getItem(this.props.primarySet)) : (localStorage.setItem(this.props.primarySet, JSON.stringify(await getData(this.props.primarySet))), JSON.parse(localStorage.getItem(this.props.primarySet))) : false
+    let secondarySet = this.props.secondarySet ? localStorage.getItem(this.props.secondarySet)!= null ? JSON.parse(localStorage.getItem(this.props.secondarySet)) : (localStorage.setItem(this.props.secondarySet, JSON.stringify(await getData(this.props.secondarySet))), JSON.parse(localStorage.getItem(this.props.secondarySet))) : false
+    let mapData = localStorage.getItem(this.props.mapData) ? JSON.parse(localStorage.getItem(this.props.mapData)) : (localStorage.setItem(this.props.mapData, JSON.stringify(await getData(this.props.mapData))), JSON.parse(localStorage.getItem(this.props.mapData)))
+    let disabledSpaces = primarySet && secondarySet ? matchAreaId(filterAreaIdDisabled(primarySet), secondarySet) : false
 
     let state = composer({
       chartId: this.props.id,
       title: this.props.title,
       lead: this.props.lead,
-      primarySet: this.props.id == 'disabledMap' ? disabledSpaces : geoParkingSpaces,
+      primarySet: this.props.id == 'disabledMap' ? disabledSpaces : secondarySet,
       secondarySet: disabledSpaces,
       mapData: mapData,
       filterOptions: this.props.filterOptions ? this.props.filterOptions.map(key => capitalizeFirstLetter(key)) : false,

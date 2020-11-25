@@ -42,8 +42,6 @@ export function composer(data) {
     filterOptions: data.filterOptions ? data.filterOptions : false
   })
 
-  console.log(data.chartId + 'lowerPart')
-
   const container = lowerPart.append('div')
   .style('display', 'flex')
   .style('flex-direction', 'column')

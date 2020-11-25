@@ -8,7 +8,7 @@ export default class Index extends React.Component {
       <>
         <FullPage>
           <GlobalStyle />
-          <MapContainer id='mindThisElement'>
+          <MapContainer>
             <Map
               id='disabledMap'
               title='Disabled'
