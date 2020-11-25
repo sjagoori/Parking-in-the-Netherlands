@@ -37,6 +37,9 @@ import Map from '../components/mapchart/Map'
 [Shabier](https://www.github.com/sjagoori)
 
 ## Changelog
+### 1.4
+* Added caching for API calls
+
 ### 1.3
 * Reorded elements, title now shows above the lead and map
 
