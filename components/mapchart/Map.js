@@ -4,7 +4,7 @@ import { getData, filterAreaIdDisabled, matchAreaId, capitalizeFirstLetter } fro
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styled from "styled-components"
 
-export default class Ayo extends React.Component {
+export default class Map extends React.Component {
   constructor(props) {
     super(props)
     this.state = { state: false }
