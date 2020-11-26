@@ -31,7 +31,7 @@ export default class Ayo extends React.Component {
   }
 
   render() {
-    console.log(this.state.state)
+    // console.log(this.state.state)
     const state = this.state.state
     const loadState = <Loader><CircularProgress /></Loader>
 

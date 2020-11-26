@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Map from '../components/mapchart/Map'
+import Pie from '../components/piechart/Pie'
 
 export default class Index extends React.Component {
   render() {
@@ -8,7 +9,19 @@ export default class Index extends React.Component {
       <>
         <FullPage>
           <GlobalStyle />
-          <MapContainer>
+
+          <ChartContainer>
+            <Pie
+              id='pieChart'
+              title='something'
+              lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'
+              primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
+            />
+          </ChartContainer>
+
+          <Devider />
+
+          <ChartContainer>
             <Map
               id='disabledMap'
               title='Disabled'
@@ -17,11 +30,11 @@ export default class Index extends React.Component {
               secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
             />
-          </MapContainer>
+          </ChartContainer>
 
           <Devider />
 
-          <MapContainer>
+          <ChartContainer>
             <Map
               id='allMap'
               title='All'
@@ -29,11 +42,11 @@ export default class Index extends React.Component {
               secondarySet='https://opendata.rdw.nl/resource/t5pc-eb34.json'
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
             />
-          </MapContainer>
+          </ChartContainer>
 
           <Devider />
 
-          <MapContainer>
+          <ChartContainer>
             <Map
               id='completeMap'
               title='Complete'
@@ -43,7 +56,7 @@ export default class Index extends React.Component {
               mapData='https://cartomap.github.io/nl/wgs84/gemeente_2020.topojson'
               filterOptions={['disabled', 'regular']}
             />
-          </MapContainer>
+          </ChartContainer>
         </FullPage>
       </>
     )
@@ -69,7 +82,7 @@ const FullPage = styled.div`
   overflow-y: scroll;
 `;
 
-const MapContainer = styled.div`
+const ChartContainer = styled.div`
   width: 100vw;
   height: 100vh;
   scroll-snap-align: start;
