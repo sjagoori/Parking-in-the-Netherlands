@@ -13,7 +13,7 @@ export default class Index extends React.Component {
           <ChartContainer>
             <Pie
               id='pieChart'
-              title='something'
+              title='Lorem ipsum'
               lead='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'
               primarySet='https://opendata.rdw.nl/resource/b3us-f26s.json'
             />
