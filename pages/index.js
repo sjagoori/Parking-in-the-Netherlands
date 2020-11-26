@@ -79,8 +79,9 @@ export default class Index extends React.Component {
 
           <ChartContainer>
             <SlideText>
-              <i>Data by <a href="https://opendata.rdw.nl/">RDW</a> </i>
               <i>Development by  <a href="https://www.github.com/sjagoori">sjagoori</a> </i>
+              <i>Data by <a href="https://opendata.rdw.nl/">RDW</a> </i>
+              <i>Oct 2020</i>
             </SlideText>
           </ChartContainer>
 
