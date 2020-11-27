@@ -5,7 +5,6 @@ import axios from 'axios'
 * @param {String} url - API endpoint
 */
 export async function getData(url) {
-  console.log({url})
   return await axios.get(url).then(response => response.data)
 }
 
