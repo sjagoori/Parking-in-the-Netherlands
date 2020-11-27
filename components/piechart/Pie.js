@@ -40,11 +40,7 @@ export default class Pie extends React.Component {
     const state = this.state.state
     const loadState = <Loader><CircularProgress /></Loader>
 
-    if (!state) {
-      return <><Chart id={this.props.id}>{loadState}</Chart></>
-    } else {
-      return <><Chart id={this.props.id}></Chart></>
-    }
+    return !state ? <><Chart id={this.props.id}>{loadState}</Chart></> : <><Chart id={this.props.id}></Chart></>
   }
 }
 
