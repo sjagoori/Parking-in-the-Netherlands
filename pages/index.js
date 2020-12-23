@@ -120,7 +120,7 @@ const ChartContainer = styled.div`
   flex-shrink: 0;
 `
 const SlideText = styled.div`
-  max-width: 900px;
+  max-width: 90%;
   text-align: center;
 
   & i { 
