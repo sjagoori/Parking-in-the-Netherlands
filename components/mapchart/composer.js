@@ -51,7 +51,6 @@ export function composer(data) {
     .attr('viewBox', [250, 0, width, height])
     .attr('class', 'map')
     .style('background-color', 'transparent ')
-    .style('width', (width * 1.1))
 
   const g = map.append('g')
   g.append('g')

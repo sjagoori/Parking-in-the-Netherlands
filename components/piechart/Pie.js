@@ -60,7 +60,8 @@ const Chart = styled.div`
     }
     @media (max-width: 800px) {
     margin: 0 auto;
-
+    width: 90%;
+    
     #pieChartlowerPart {
       flex-direction: column;
       align-items: center;

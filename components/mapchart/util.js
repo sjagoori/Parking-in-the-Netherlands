@@ -81,7 +81,6 @@ export const generateHeadBlock = (data) => {
   const head = select('#' + data.id + 'lowerPart').append('div')
     .style('display', 'flex')
     .style('flex-direction', 'column')
-    .style('width', '350px')
   head.append('p')
     .text(data.lead)
 

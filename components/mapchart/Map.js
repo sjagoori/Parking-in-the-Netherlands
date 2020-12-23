@@ -74,4 +74,30 @@ const Chart = styled.div`
     stroke: #000;
     stroke-width: .3px
   }
+
+  .map{
+    width: 500px;
+  }
+
+  div p {
+    width: 350px;      
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
+    padding: 10px;
+
+    div[id$="lowerPart"]{
+      flex-direction: column;
+      align-items: center;
+    }
+
+    div p {
+      width: 90%;      
+    }
+
+    .map{
+      width: 90%;
+    }
+  }
 `
