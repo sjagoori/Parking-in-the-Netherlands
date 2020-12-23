@@ -49,7 +49,6 @@ export const generateHeadBlock = (data) => {
   const head = select('#' + data.id + 'lowerPart').append('div')
     head.append('p')
     .text(data.lead)
-    .style('width', '350px')
 }
 
 /**

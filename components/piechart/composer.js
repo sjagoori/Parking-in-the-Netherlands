@@ -27,7 +27,7 @@ export function composer(data) {
   const lowerPart = d3.select("#" + data.chartId)
     .append('div')
     .attr('id', data.chartId + 'lowerPart')
-    .style('width', '1000px')
+    .style('width', '100%')
     .style('display', 'flex')
     .style('justify-content', 'space-between')
 

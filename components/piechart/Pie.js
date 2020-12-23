@@ -11,7 +11,7 @@ export default class Pie extends React.Component {
   }
 
   async componentDidMount() {
-    let primarySet = this.props.primarySet ? localStorage.getItem(this.props.primarySet) != null? JSON.parse(localStorage.getItem(this.props.primarySet)) : (localStorage.setItem(this.props.primarySet, JSON.stringify(await getData(this.props.primarySet))), JSON.parse(localStorage.getItem(this.props.primarySet))) : false
+    let primarySet = this.props.primarySet ? localStorage.getItem(this.props.primarySet) != null ? JSON.parse(localStorage.getItem(this.props.primarySet)) : (localStorage.setItem(this.props.primarySet, JSON.stringify(await getData(this.props.primarySet))), JSON.parse(localStorage.getItem(this.props.primarySet))) : false
     let disabledAreas = filterDisabled(primarySet, 1)
 
     let state = composer(
@@ -29,7 +29,7 @@ export default class Pie extends React.Component {
             label: 'Disabled friendly'
           }
         ],
-      credits: [this.props.primarySet]
+        credits: [this.props.primarySet]
       }
     )
 
@@ -54,5 +54,28 @@ const Loader = styled.div`
 `
 
 const Chart = styled.div`
+    padding: 10px;
+    div p {
+      width: 350px;
+    }
+    @media (max-width: 800px) {
+    margin: 0 auto;
 
+    #pieChartlowerPart {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    div p {
+      width: 80%;
+    }
+
+    svg {
+      width: 315px;
+    }
+
+    .legend {
+      display: none;
+      }
+  }
 `
